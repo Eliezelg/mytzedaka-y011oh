@@ -1,0 +1,111 @@
+{
+  "standardCampaign": {
+    "id": "std-campaign-1",
+    "title": "Building Fund Campaign",
+    "description": "Help us build a new community center",
+    "goalAmount": 100000,
+    "minimumDonationAmount": 18,
+    "currency": "USD",
+    "visibility": "public",
+    "shareableUrl": "https://example.com/campaigns/std-campaign-1",
+    "socialShareText": "Support our community's growth! Help us build a new center for all.",
+    "categories": ["building", "community", "infrastructure"],
+    "images": [
+      {
+        "url": "campaign1-image1.jpg",
+        "altText": "Architectural rendering of new community center",
+        "ariaLabel": "Visual representation of the proposed community center building"
+      },
+      {
+        "url": "campaign1-image2.jpg",
+        "altText": "Current community center location",
+        "ariaLabel": "Photo of the current community center site"
+      }
+    ],
+    "startDate": "2024-01-01T00:00:00Z",
+    "endDate": "2024-12-31T23:59:59Z",
+    "associationId": "assoc-1",
+    "currentAmount": 75000,
+    "donorCount": 150,
+    "isLottery": false,
+    "lotteryDetails": null,
+    "status": "active",
+    "translations": {
+      "he": {
+        "title": "קמפיין קרן הבניין",
+        "description": "עזרו לנו לבנות מרכז קהילתי חדש",
+        "socialShareText": "תמכו בצמיחת הקהילה שלנו! עזרו לנו לבנות מרכז חדש לכולם"
+      },
+      "fr": {
+        "title": "Campagne du Fonds de Construction",
+        "description": "Aidez-nous à construire un nouveau centre communautaire",
+        "socialShareText": "Soutenez la croissance de notre communauté! Aidez-nous à construire un nouveau centre pour tous."
+      }
+    }
+  },
+  "lotteryCampaign": {
+    "id": "lottery-campaign-1",
+    "title": "Annual Charity Lottery",
+    "description": "Join our annual charity lottery with amazing prizes",
+    "goalAmount": 50000,
+    "minimumDonationAmount": 18,
+    "currency": "USD",
+    "visibility": "public",
+    "shareableUrl": "https://example.com/campaigns/lottery-campaign-1",
+    "socialShareText": "Win amazing prizes while supporting a great cause!",
+    "categories": ["lottery", "prizes", "annual"],
+    "images": [
+      {
+        "url": "lottery1-image1.jpg",
+        "altText": "Grand prize luxury car",
+        "ariaLabel": "Photo of the grand prize: a new luxury vehicle"
+      }
+    ],
+    "startDate": "2024-02-01T00:00:00Z",
+    "endDate": "2024-03-31T23:59:59Z",
+    "associationId": "assoc-2",
+    "currentAmount": 25000,
+    "donorCount": 500,
+    "isLottery": true,
+    "lotteryDetails": {
+      "drawDate": "2024-04-01T12:00:00Z",
+      "ticketPrice": 18,
+      "currency": "USD",
+      "maxTickets": 5000,
+      "ticketsSold": 2750,
+      "remainingTickets": 2250,
+      "winnerSelectionMethod": "random",
+      "termsAndConditions": "Full terms and conditions available at https://example.com/lottery-terms",
+      "prizes": [
+        {
+          "description": "Luxury Car - 2024 Model",
+          "value": 50000,
+          "imageUrl": "prizes/luxury-car.jpg"
+        },
+        {
+          "description": "Dream Vacation Package",
+          "value": 10000,
+          "imageUrl": "prizes/vacation.jpg"
+        },
+        {
+          "description": "Premium Electronics Bundle",
+          "value": 5000,
+          "imageUrl": "prizes/electronics.jpg"
+        }
+      ]
+    },
+    "status": "active",
+    "translations": {
+      "he": {
+        "title": "הגרלת צדקה שנתית",
+        "description": "הצטרפו להגרלת הצדקה השנתית שלנו עם פרסים מדהימים",
+        "socialShareText": "זכו בפרסים מדהימים תוך תמיכה במטרה נעלה!"
+      },
+      "fr": {
+        "title": "Loterie Caritative Annuelle",
+        "description": "Rejoignez notre loterie caritative annuelle avec des prix incroyables",
+        "socialShareText": "Gagnez des prix incroyables tout en soutenant une noble cause!"
+      }
+    }
+  }
+}
