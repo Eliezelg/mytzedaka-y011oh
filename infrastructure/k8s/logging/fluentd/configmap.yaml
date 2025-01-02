@@ -1,0 +1,127 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: logging
+  labels:
+    app: fluentd
+    service: logging
+    environment: production
+data:
+  fluent.conf: |
+    # System configurations
+    <system>
+      log_level info
+      workers 4
+      root_dir /var/log/fluentd
+      suppress_repeated_stacktrace true
+    </system>
+
+    # Source configurations for container logs
+    <source>
+      @type tail
+      path /var/log/containers/*.log
+      pos_file /var/log/fluentd-containers.log.pos
+      tag kubernetes.*
+      read_from_head true
+      <parse>
+        @type kubernetes
+        @time_format %Y-%m-%dT%H:%M:%S.%NZ
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        keep_time_key true
+      </parse>
+      refresh_interval 5s
+    </source>
+
+    # Source configuration for Docker daemon logs
+    <source>
+      @type tail
+      path /var/log/docker.log
+      pos_file /var/log/fluentd-docker.log.pos
+      tag docker.*
+      read_from_head true
+      <parse>
+        @type json
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        keep_time_key true
+      </parse>
+      refresh_interval 5s
+    </source>
+
+    # Kubernetes metadata filter
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+      @id filter_kube_metadata
+      kubernetes_url "#{ENV['KUBERNETES_URL'] || 'https://' + ENV['KUBERNETES_SERVICE_HOST'] + ':' + ENV['KUBERNETES_SERVICE_PORT']}/api"
+      bearer_token_file /var/run/secrets/kubernetes.io/serviceaccount/token
+      ca_file /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      watch true
+      cache_size 10000
+      cache_ttl 3600
+    </filter>
+
+    # Transform and enrich log records
+    <filter kubernetes.**>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        container_name ${record.dig('kubernetes', 'container_name')}
+        namespace_name ${record.dig('kubernetes', 'namespace_name')}
+        pod_name ${record.dig('kubernetes', 'pod_name')}
+        cluster_name production
+        log_timestamp ${time.strftime('%Y-%m-%dT%H:%M:%S.%NZ')}
+        severity ${record['severity'] || record.dig('kubernetes', 'labels', 'severity') || 'INFO'}
+        environment production
+      </record>
+    </filter>
+
+    # Output configuration for Elasticsearch
+    <match **>
+      @type elasticsearch
+      @id elasticsearch
+      host elasticsearch.logging.svc.cluster.local
+      port 9200
+      logstash_format true
+      logstash_prefix logstash
+      include_tag_key true
+      tag_key @log_name
+      
+      # Buffer configuration for production load
+      <buffer>
+        @type file
+        path /var/log/fluentd/buffer/elasticsearch
+        flush_mode interval
+        flush_interval 5s
+        flush_thread_count 4
+        chunk_limit_size 2M
+        queue_limit_length 32
+        overflow_action block
+        retry_max_times 10
+        retry_wait 30s
+        retry_exponential_backoff true
+        retry_max_interval 300s
+      </buffer>
+
+      # Connection settings
+      reconnect_on_error true
+      reload_on_failure true
+      request_timeout 30s
+      
+      # Compression to reduce network bandwidth
+      compression_level 3
+      
+      # Enable SSL/TLS if Elasticsearch is secured
+      ssl_verify false
+      
+      # Index settings
+      index_name logstash
+      type_name fluentd
+    </match>
+
+    # Health check endpoint
+    <source>
+      @type monitor_agent
+      bind 0.0.0.0
+      port 24220
+      tag fluentd.monitor
+    </source>
