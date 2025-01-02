@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ijap-config
+  labels:
+    app: ijap
+    component: config
+    environment: staging
+    managed-by: kustomize
+data:
+  # Environment Configuration
+  NODE_ENV: "staging"
+  
+  # Performance Tuning for Testing
+  API_TIMEOUT: "60"  # Increased timeout for testing
+  CACHE_TTL: "300"  # Reduced cache TTL for faster testing iterations
+  DB_CONNECTION_POOL: "25"  # Reduced pool size for staging
+  
+  # Enhanced Debugging and Logging
+  ENABLE_DEBUG: "true"
+  LOG_LEVEL: "debug"
+  
+  # Rate Limiting - Adjusted for Testing
+  RATE_LIMIT_WINDOW: "300"
+  RATE_LIMIT_MAX_REQUESTS: "5000"
+  
+  # Resource Limits
+  REDIS_MAX_CONNECTIONS: "50"
+  
+  # Session Management
+  SESSION_DURATION: "86400"  # Extended for testing (24 hours)
+  
+  # Payment Gateway Sandbox Configuration
+  STRIPE_API_VERSION: "2023-10"
+  STRIPE_MODE: "sandbox"
+  TRANZILLA_MODE: "test"
+  
+  # Security Settings - Modified for Testing
+  CORS_ENABLED: "true"
+  CORS_ORIGINS: "https://staging.ijap.org,http://localhost:3000"
+  JWT_EXPIRY: "30m"  # Extended for testing
+  REFRESH_TOKEN_EXPIRY: "14d"  # Extended for testing
+  
+  # Monitoring and Observability
+  ENABLE_METRICS: "true"
+  ENABLE_TRACING: "true"
+  ENABLE_DETAILED_LOGGING: "true"
+  
+  # File Handling
+  MAX_FILE_SIZE: "20971520"  # Increased to 20MB for testing
+  
+  # Data Management - Modified for Staging
+  BACKUP_FREQUENCY: "hourly"  # More frequent backups
+  RETENTION_PERIOD: "30days"  # Shorter retention for staging
