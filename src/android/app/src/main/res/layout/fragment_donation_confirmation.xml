@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ijap.app.ui.donation.DonationViewModel" />
+        <variable
+            name="fragment"
+            type="com.ijap.app.ui.donation.DonationConfirmationFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_large"
+        android:layoutDirection="locale"
+        android:importantForAccessibility="yes"
+        android:contentDescription="@string/donation_confirmation_screen">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/donation_summary_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.CardView"
+            android:elevation="@dimen/card_elevation"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/donation_summary_card">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_large">
+
+                <TextView
+                    android:id="@+id/donation_summary_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.App.Headline1"
+                    android:text="@string/donation_summary_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:accessibilityHeading="true"/>
+
+                <TextView
+                    android:id="@+id/donation_amount_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/donation_amount_label"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintTop_toBottomOf="@id/donation_summary_title"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/donation_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.formattedAmount}"
+                    app:layout_constraintTop_toTopOf="@id/donation_amount_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="$100.00"/>
+
+                <TextView
+                    android:id="@+id/recipient_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recipient_label"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintTop_toBottomOf="@id/donation_amount_label"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/recipient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.recipientName}"
+                    app:layout_constraintTop_toTopOf="@id/recipient_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Jewish Association"/>
+
+                <TextView
+                    android:id="@+id/payment_method_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_method_label"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintTop_toBottomOf="@id/recipient_label"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/payment_method"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.paymentMethodDescription}"
+                    app:layout_constraintTop_toTopOf="@id/payment_method_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Visa ****1234"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            style="@style/Widget.App.Button.Primary"
+            android:text="@string/confirm_donation"
+            android:onClick="@{() -> fragment.onConfirmClick()}"
+            android:enabled="@{!viewModel.isLoading}"
+            app:layout_constraintBottom_toTopOf="@id/cancel_button"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:contentDescription="@string/confirm_donation_button_description"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            style="@style/Widget.App.Button.Secondary"
+            android:text="@string/cancel_donation"
+            android:onClick="@{() -> fragment.onCancelClick()}"
+            android:enabled="@{!viewModel.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:contentDescription="@string/cancel_donation_button_description"/>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading ? android.view.View.VISIBLE : android.view.View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/loading_indicator_description"/>
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.errorMessage}"
+            android:visibility="@{viewModel.hasError ? android.view.View.VISIBLE : android.view.View.GONE}"
+            android:textAlignment="center"
+            android:textColor="@color/error"
+            app:layout_constraintTop_toBottomOf="@id/donation_summary_card"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:contentDescription="@string/error_message_description"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            style="@style/Widget.App.Button.Secondary"
+            android:text="@string/retry"
+            android:onClick="@{() -> fragment.onRetryClick()}"
+            android:visibility="@{viewModel.hasError ? android.view.View.VISIBLE : android.view.View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/error_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:contentDescription="@string/retry_button_description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
