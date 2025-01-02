@@ -1,0 +1,66 @@
+# Kubernetes version: v1.24+
+# Development environment Kustomize configuration for International Jewish Association Donation Platform
+# kustomize version: v5.0.0
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Reference base configuration
+resources:
+  - ../../base
+
+# Development environment prefix
+namePrefix: dev-
+
+# Common labels for development environment
+commonLabels:
+  environment: development
+  app: ijap
+  managed-by: kustomize
+  debug-enabled: "true"
+
+# Development-specific annotations
+commonAnnotations:
+  app.kubernetes.io/environment: development
+  app.kubernetes.io/part-of: ijap-platform
+  app.kubernetes.io/managed-by: kustomize
+  security.ijap.com/audit-level: debug
+  monitoring.ijap.com/log-level: debug
+  development.ijap.com/mock-services: enabled
+
+# Apply development-specific patches
+patches:
+  - path: patch-configmap.yaml
+  - path: patch-deployment.yaml
+
+# Development environment configuration
+configMapGenerator:
+  - name: app-config
+    behavior: merge
+    envs:
+      - dev.env
+    options:
+      disableNameSuffixHash: true
+      labels:
+        config-type: development
+        debug-enabled: "true"
+
+# Development secrets configuration
+secretGenerator:
+  - name: app-secrets
+    behavior: merge
+    envs:
+      - dev.secrets
+    options:
+      disableNameSuffixHash: true
+      labels:
+        secret-type: development
+        rotation-policy: manual
+
+# Generator options for development environment
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    generated-by: kustomize
+    environment: development
+    debug-enabled: "true"
