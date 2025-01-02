@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- Authentication Flow -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ijap.app.ui.auth.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_login_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <deepLink app:uri="ijap://login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.ijap.app.ui.auth.RegisterFragment"
+        android:label="@string/register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_verification"
+            app:destination="@id/emailVerificationFragment" />
+    </fragment>
+
+    <!-- Main Navigation Flow -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.ijap.app.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_donation"
+            app:destination="@id/donationFormFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_profile"
+            app:destination="@id/profileFragment" />
+        <deepLink app:uri="ijap://dashboard" />
+    </fragment>
+
+    <!-- Donation Flow -->
+    <fragment
+        android:id="@+id/donationFormFragment"
+        android:name="com.ijap.app.ui.donation.DonationFormFragment"
+        android:label="@string/donation_form"
+        tools:layout="@layout/fragment_donation_form">
+        <argument
+            android:name="associationId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_donation_to_confirmation"
+            app:destination="@id/donationConfirmationFragment" />
+        <deepLink app:uri="ijap://donate/{associationId}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/donationConfirmationFragment"
+        android:name="com.ijap.app.ui.donation.DonationConfirmationFragment"
+        android:label="@string/donation_confirmation"
+        tools:layout="@layout/fragment_donation_confirmation">
+        <argument
+            android:name="donationId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_confirmation_to_success"
+            app:destination="@id/donationSuccessFragment"
+            app:popUpTo="@id/dashboardFragment" />
+    </fragment>
+
+    <!-- Profile and Settings Flow -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ijap.app.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settingsFragment" />
+        <deepLink app:uri="ijap://profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ijap.app.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_language"
+            app:destination="@id/languageSettingFragment" />
+        <action
+            android:id="@+id/action_settings_to_notifications"
+            app:destination="@id/notificationSettingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/languageSettingFragment"
+        android:name="com.ijap.app.ui.settings.LanguageSettingFragment"
+        android:label="@string/language_settings"
+        tools:layout="@layout/fragment_language_settings" />
+
+    <fragment
+        android:id="@+id/notificationSettingFragment"
+        android:name="com.ijap.app.ui.settings.NotificationSettingFragment"
+        android:label="@string/notification_settings"
+        tools:layout="@layout/fragment_notification_settings" />
+
+    <!-- Global Actions -->
+    <action
+        android:id="@+id/action_global_login"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+</navigation>
