@@ -1,0 +1,202 @@
+/* RTL Styles for International Jewish Association Donation Platform
+ * Version: 1.0.0
+ * Supports: Material Design 3.0, WCAG 2.1 Level AA, Hebrew language
+ */
+
+@import './theme.css';
+
+/* Global RTL Direction Settings */
+[dir='rtl'] {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-family-hebrew), var(--font-family-base);
+  unicode-bidi: embed;
+}
+
+/* Global RTL Text Adjustments */
+[dir='rtl'] * {
+  letter-spacing: 0;
+  text-shadow: var(--rtl-text-shadow);
+}
+
+/* RTL Form Elements */
+[dir='rtl'] input,
+[dir='rtl'] textarea {
+  text-align: right;
+  padding-right: var(--spacing-input-rtl);
+  direction: rtl;
+}
+
+/* Bidirectional Text Isolation */
+[dir='rtl'] .bidi-isolation {
+  unicode-bidi: isolate;
+  direction: rtl;
+}
+
+/* RTL Layout Classes */
+.rtl-layout {
+  /* Float Utilities */
+  &-float-right {
+    float: right;
+  }
+  
+  &-float-left {
+    float: left;
+  }
+  
+  /* Material Design Elevation */
+  &-shadow {
+    box-shadow: var(--rtl-elevation-shadow);
+  }
+  
+  /* Border Radius Adjustments */
+  &-border-radius {
+    border-radius: var(--rtl-border-radius-values);
+  }
+}
+
+/* RTL Spacing System */
+.rtl-spacing {
+  /* Margin Utilities */
+  &-margin-start {
+    margin-inline-start: var(--spacing-unit);
+  }
+  
+  &-margin-end {
+    margin-inline-end: var(--spacing-unit);
+  }
+  
+  /* Padding Utilities */
+  &-padding-start {
+    padding-inline-start: var(--spacing-unit);
+  }
+  
+  &-padding-end {
+    padding-inline-end: var(--spacing-unit);
+  }
+}
+
+/* RTL Flexbox Layout */
+.rtl-flex {
+  /* Flex Direction */
+  &-row-reverse {
+    flex-direction: row-reverse;
+  }
+  
+  /* Justify Content */
+  &-justify-start {
+    justify-content: flex-end;
+  }
+  
+  &-justify-end {
+    justify-content: flex-start;
+  }
+  
+  /* Flex Order */
+  &-flex-order {
+    order: var(--rtl-flex-order);
+  }
+}
+
+/* RTL Grid System */
+.rtl-grid {
+  /* Grid Template Areas */
+  &-grid-template-areas {
+    grid-template-areas: var(--rtl-grid-areas);
+  }
+  
+  /* Grid Column Flow */
+  &-grid-column {
+    grid-auto-flow: dense;
+  }
+  
+  /* Grid Start Position */
+  &-grid-start {
+    grid-column-start: var(--rtl-grid-start);
+  }
+}
+
+/* RTL Component Styles */
+.rtl-components {
+  /* Modal Components */
+  &-modal {
+    transform-origin: var(--rtl-modal-origin);
+    direction: rtl;
+  }
+  
+  /* Tooltip Components */
+  &-tooltip {
+    direction: rtl;
+    text-align: right;
+  }
+}
+
+/* RTL Material Design Overrides */
+[dir='rtl'] {
+  /* Material Icons */
+  .material-icons {
+    transform: scaleX(-1);
+  }
+  
+  /* Navigation */
+  .nav-icon {
+    margin-left: var(--spacing-unit);
+    margin-right: 0;
+  }
+  
+  /* Drawer */
+  .drawer {
+    left: auto;
+    right: 0;
+  }
+  
+  /* Dialog */
+  .dialog-content {
+    text-align: right;
+  }
+  
+  /* Lists */
+  .list-item-icon {
+    margin-right: 0;
+    margin-left: var(--spacing-unit);
+  }
+}
+
+/* RTL Accessibility Enhancements */
+[dir='rtl'] {
+  /* Focus Indicators */
+  *:focus {
+    outline-offset: 2px;
+  }
+  
+  /* Skip Links */
+  .skip-link {
+    right: var(--spacing-unit);
+    left: auto;
+  }
+  
+  /* ARIA Labels */
+  [aria-label] {
+    unicode-bidi: embed;
+  }
+}
+
+/* RTL Print Styles */
+@media print {
+  [dir='rtl'] {
+    /* Ensure correct text direction in print */
+    direction: rtl !important;
+    text-align: right !important;
+  }
+}
+
+/* RTL Responsive Adjustments */
+@media (max-width: 600px) {
+  [dir='rtl'] {
+    /* Mobile-specific RTL adjustments */
+    .mobile-nav {
+      padding-right: var(--spacing-unit);
+      padding-left: 0;
+    }
+  }
+}
