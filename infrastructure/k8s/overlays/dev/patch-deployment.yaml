@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ijap-api
+  labels:
+    environment: development
+---
+# API Service Development Patch
+- op: replace
+  path: /spec/replicas
+  value: 1
+
+- op: replace
+  path: /spec/template/spec/containers/0/resources
+  value:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+- op: replace
+  path: /spec/template/spec/containers/0/env
+  value:
+    - name: NODE_ENV
+      value: "development"
+    - name: LOG_LEVEL
+      value: "debug"
+    - name: ENABLE_DEBUG
+      value: "true"
+    - name: API_TIMEOUT
+      value: "60"
+    - name: ENABLE_METRICS
+      value: "true"
+    - name: ENABLE_TRACING
+      value: "true"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ijap-web
+  labels:
+    environment: development
+---
+# Web Service Development Patch
+- op: replace
+  path: /spec/replicas
+  value: 1
+
+- op: replace
+  path: /spec/template/spec/containers/0/resources
+  value:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "200m"
+      memory: "512Mi"
+
+- op: replace
+  path: /spec/template/spec/containers/0/env
+  value:
+    - name: REACT_APP_ENV
+      value: "development"
+    - name: REACT_APP_API_URL
+      value: "http://api-service:3000"
+    - name: NODE_ENV
+      value: "development"
+    - name: ENABLE_DEBUG
+      value: "true"
+    - name: ENABLE_SOURCE_MAPS
+      value: "true"
+    - name: REACT_APP_STRIPE_PUBLIC_KEY
+      valueFrom:
+        secretKeyRef:
+          name: ijap-secrets
+          key: STRIPE_PUBLIC_KEY
+    - name: REACT_APP_TRANZILLA_TERMINAL_ID
+      valueFrom:
+        secretKeyRef:
+          name: ijap-secrets
+          key: TRANZILLA_TERMINAL_ID
+
+- op: replace
+  path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
+  value: 60
+
+- op: replace
+  path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
+  value: 30
