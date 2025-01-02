@@ -1,0 +1,117 @@
+# NetworkPolicy configuration for International Jewish Association Donation Platform
+# Kubernetes API version: networking.k8s.io/v1
+# Implements zero-trust network security model with explicit traffic controls
+
+---
+# Default deny-all policy to establish zero-trust baseline
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: ijap
+  labels:
+    app: ijap
+    component: network-policy
+    managed-by: kustomize
+    security-tier: platform
+spec:
+  podSelector: {} # Applies to all pods in namespace
+  policyTypes:
+    - Ingress
+    - Egress
+
+---
+# API service network policy with explicit ingress/egress rules
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-network-policy
+  namespace: ijap
+  labels:
+    app: ijap
+    component: api
+    managed-by: kustomize
+    security-tier: application
+spec:
+  podSelector:
+    matchLabels:
+      app: ijap
+      component: api
+      tier: backend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ijap
+          podSelector:
+            matchLabels:
+              app: ijap
+              component: web
+              tier: frontend
+      ports:
+        - port: 80
+          protocol: TCP
+        - port: 443
+          protocol: TCP
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ijap
+          podSelector:
+            matchLabels:
+              app: ijap
+              component: database
+              tier: data
+
+---
+# Payment service network policy with PCI DSS compliant controls
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: payment-network-policy
+  namespace: ijap
+  labels:
+    app: ijap
+    component: payment
+    managed-by: kustomize
+    security-tier: pci-compliant
+spec:
+  podSelector:
+    matchLabels:
+      app: ijap
+      component: payment
+      tier: backend
+      pci-scope: in-scope
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ijap
+          podSelector:
+            matchLabels:
+              app: ijap
+              component: api
+              tier: backend
+      ports:
+        - port: 8080
+          protocol: TCP
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8      # RFC 1918 private network
+              - 172.16.0.0/12   # RFC 1918 private network
+              - 192.168.0.0/16  # RFC 1918 private network
+              - 169.254.0.0/16  # Link-local addresses
+              - fc00::/7        # Unique local addresses
+      ports:
+        - port: 443
+          protocol: TCP
