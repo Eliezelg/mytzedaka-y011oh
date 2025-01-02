@@ -1,0 +1,121 @@
+# SwiftLint configuration for IJAP iOS Application
+# Version: 0.50.3
+
+# Opt-in rules for stricter code quality enforcement
+opt_in_rules:
+  - empty_count
+  - explicit_self
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - implicit_getter
+  - missing_docs
+  - private_action
+  - private_outlet
+  - sorted_imports
+  - trailing_closure
+  - unowned_variable_capture
+  - vertical_parameter_alignment_on_call
+
+# Excluded paths from linting
+excluded:
+  - Pods
+  - IJAPTests
+  - IJAPUITests
+  - fastlane
+
+# Line length restrictions
+line_length:
+  warning: 120
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+# File length restrictions
+file_length:
+  warning: 400
+  error: 1000
+
+# Type body length restrictions
+type_body_length:
+  warning: 300
+  error: 500
+
+# Function body length restrictions
+function_body_length:
+  warning: 50
+  error: 100
+
+# Function parameter count limits
+function_parameter_count:
+  warning: 5
+  error: 8
+
+# Cyclomatic complexity limits
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+
+# Type naming rules
+type_name:
+  min_length: 3
+  max_length: 50
+
+# Identifier naming rules
+identifier_name:
+  min_length: 2
+  max_length: 40
+  excluded:
+    - id
+    - URL
+    - x
+    - y
+
+# Nesting depth limits
+nesting:
+  type_level:
+    warning: 2
+    error: 3
+
+# Whitespace rules
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: true
+
+vertical_whitespace:
+  max_empty_lines: 2
+
+# Disabled rules that don't align with project requirements
+disabled_rules:
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - conditional_returns_on_newline
+  - empty_enum_arguments
+  - explicit_init
+  - explicit_type_interface
+  - file_header
+  - first_where
+  - force_unwrapping
+  - function_parameter_count
+  - implicit_return
+  - implicitly_unwrapped_optional
+  - missing_docs
+  - multiline_parameters
+  - multiple_closures_with_trailing_closure
+  - operator_usage_whitespace
+  - private_outlet
+  - prohibited_super_call
+  - protocol_property_accessors_order
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - strict_fileprivate
+  - switch_case_on_newline
+  - trailing_closure
+  - type_name
+  - unneeded_parentheses_in_closure_argument
+  - unused_closure_parameter
+  - unused_enumerated
+  - valid_ibinspectable
+  - vertical_parameter_alignment_on_call
