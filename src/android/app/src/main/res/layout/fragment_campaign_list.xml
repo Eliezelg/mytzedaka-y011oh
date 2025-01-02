@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ijap.app.ui.campaign.CampaignViewModel" />
+        <variable
+            name="searchQuery"
+            type="androidx.lifecycle.MutableLiveData&lt;String&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        android:layoutDirection="locale">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/campaignSearchView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@color/surface_light"
+            android:elevation="@dimen/card_elevation"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/search_campaigns"
+            android:textAlignment="viewStart"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_campaigns"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/campaignSwipeRefresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintTop_toBottomOf="@id/campaignSearchView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/campaignRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:layoutDirection="locale"
+                android:padding="@dimen/spacing_medium"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@string/campaign_list_description"
+                app:spanCount="2"
+                tools:listitem="@layout/item_campaign"
+                tools:itemCount="6" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/emptyStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_campaigns_found"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/no_campaigns_found"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/loadingIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/loading_campaigns"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
