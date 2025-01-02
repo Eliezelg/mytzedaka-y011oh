@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ijap-api
+  labels:
+    app: ijap
+    component: api
+    managed-by: kustomize
+    compliance: pci-dss
+    environment: production
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: ijap
+      component: api
+  template:
+    metadata:
+      labels:
+        app: ijap
+        component: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/metrics"
+        seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+        container.apparmor.security.beta.kubernetes.io/api: "runtime/default"
+    spec:
+      serviceAccountName: ijap-api-sa
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: ijap
+              component: api
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - ijap
+              topologyKey: kubernetes.io/hostname
+      initContainers:
+        - name: init-check
+          image: ijap/init-check:latest
+          command: ["sh", "-c", "until nc -z mongodb 27017; do echo waiting for mongodb; sleep 2; done;"]
+      containers:
+        - name: api
+          image: ijap/api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            successThreshold: 1
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
+          envFrom:
+            - configMapRef:
+                name: ijap-config
+            - secretRef:
+                name: ijap-secrets
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
+            - name: certs
+              mountPath: /etc/certs
+              readOnly: true
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: certs
+          secret:
+            secretName: ijap-certs
+      securityContext:
+        fsGroup: 1000
+        supplementalGroups:
+          - 1000
+      terminationGracePeriodSeconds: 60
