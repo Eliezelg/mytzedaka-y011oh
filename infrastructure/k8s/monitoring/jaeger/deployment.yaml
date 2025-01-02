@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+  namespace: monitoring
+  labels:
+    app: jaeger
+    component: tracing
+spec:
+  # Single replica since this is all-in-one deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - name: jaeger
+        # jaegertracing/all-in-one:1.39 - All-in-one Jaeger deployment image
+        image: jaegertracing/all-in-one:1.39
+        ports:
+        # Agent ports
+        - name: agent-udp
+          containerPort: 5775
+          protocol: UDP
+        - name: agent-thrift
+          containerPort: 6831
+          protocol: UDP
+        - name: agent-binary
+          containerPort: 6832
+          protocol: UDP
+        - name: agent-http
+          containerPort: 5778
+        # UI and API port
+        - name: query
+          containerPort: 16686
+        # Collector ports
+        - name: collector-grpc
+          containerPort: 14250
+        - name: collector-http
+          containerPort: 14268
+        # Zipkin compatible endpoint
+        - name: zipkin
+          containerPort: 9411
+        env:
+        # Configure Zipkin collector endpoint
+        - name: COLLECTOR_ZIPKIN_HOST_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: jaeger-config
+              key: collector.zipkin.host-port
+        # Configure sampling strategies
+        - name: SAMPLING_STRATEGIES_FILE
+          valueFrom:
+            configMapKeyRef:
+              name: jaeger-config
+              key: sampling.strategies-file
+        resources:
+          limits:
+            cpu: "1000m"    # 1 CPU core limit
+            memory: "2Gi"   # 2GB memory limit
+          requests:
+            cpu: "500m"     # Request 0.5 CPU cores
+            memory: "1Gi"   # Request 1GB memory
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/jaeger
+      volumes:
+      - name: config-volume
+        configMap:
+          name: jaeger-config
