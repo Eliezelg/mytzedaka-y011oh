@@ -1,0 +1,84 @@
+# Logstash Configuration for IJAP Platform
+# Version: 7.17.0
+# Purpose: Production-grade configuration for centralized logging pipeline
+
+#----------------------
+# Node Settings
+#----------------------
+node.name: ${HOSTNAME}
+
+# Data paths configuration
+path.data: /usr/share/logstash/data
+path.logs: /usr/share/logstash/logs
+path.config: /usr/share/logstash/pipeline
+
+#----------------------
+# Pipeline Settings
+#----------------------
+# Optimized for high-throughput log processing
+pipeline.workers: 2
+pipeline.batch.size: 125
+pipeline.batch.delay: 50
+
+# Persistent queue configuration for data reliability
+queue.type: persisted
+queue.max_bytes: 1gb
+queue.checkpoint.writes: 1024
+
+#----------------------
+# Monitoring Settings
+#----------------------
+# X-Pack monitoring integration with Elasticsearch
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.hosts: ["http://elasticsearch:9200"]
+xpack.monitoring.collection.interval: 10s
+
+# Monitoring authentication
+xpack.monitoring.elasticsearch.username: ${MONITORING_USER}
+xpack.monitoring.elasticsearch.password: ${MONITORING_PASSWORD}
+
+#----------------------
+# API Settings
+#----------------------
+# REST API configuration with security
+api.enabled: true
+api.http.host: "0.0.0.0"
+api.http.port: 9600
+
+# API authentication
+api.auth.type: basic
+api.auth.basic.username: ${API_USER}
+api.auth.basic.password: ${API_PASSWORD}
+
+#----------------------
+# Logging Settings
+#----------------------
+# JSON formatted logs with rotation
+log.level: info
+log.format: json
+log.rotation.enabled: true
+log.rotation.max_size: 100mb
+log.rotation.max_files: 7
+
+#----------------------
+# Performance Settings
+#----------------------
+# Memory and processing optimization
+config.reload.automatic: true
+config.reload.interval: 3s
+dead_letter_queue.enable: true
+dead_letter_queue.max_bytes: 1gb
+
+#----------------------
+# HTTP Settings
+#----------------------
+http.host: "0.0.0.0"
+http.port: 9600
+
+#----------------------
+# Module Settings
+#----------------------
+modules:
+  - name: elasticsearch
+    var.elasticsearch.hosts: ["http://elasticsearch:9200"]
+    var.elasticsearch.ssl.enabled: true
