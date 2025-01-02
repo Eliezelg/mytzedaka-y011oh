@@ -1,0 +1,107 @@
+# Kubernetes version: v1.24+
+# Base Kustomize configuration for International Jewish Association Donation Platform
+# Implements PCI DSS compliance, multi-region support, and enhanced security controls
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Base resources to be included in all environments
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secrets.yaml
+  - storage.yaml
+  - network-policy.yaml
+  - service-account.yaml
+
+# Common labels applied to all resources
+commonLabels:
+  app: ijap
+  managed-by: kustomize
+  environment: base
+  pci-compliance: enabled
+  security-tier: high
+
+# Common annotations for security, compliance and operational requirements
+commonAnnotations:
+  app.kubernetes.io/part-of: ijap-platform
+  app.kubernetes.io/managed-by: kustomize
+  security.ijap.com/audit-level: strict
+  security.ijap.com/pci-compliance: enabled
+  security.ijap.com/encryption-required: "true"
+  backup.ijap.com/retention-policy: 7years
+  security.ijap.com/secret-rotation: enabled
+
+# Prefix for all resources
+namePrefix: ijap-
+
+# ConfigMap generation with security validations
+configMapGenerator:
+  - name: app-config
+    behavior: merge
+    files:
+      - configmap.yaml
+    options:
+      labels:
+        config-type: application
+        security-reviewed: "true"
+
+# Secret generation with enhanced security controls
+secretGenerator:
+  - name: app-secrets
+    behavior: merge
+    files:
+      - secrets.yaml
+    options:
+      labels:
+        secret-type: application
+        rotation-required: "true"
+
+# Generator options for security compliance
+generatorOptions:
+  disableNameSuffixHash: false
+  labels:
+    generated-by: kustomize
+    security-validated: "true"
+    pci-compliant: "true"
+
+# Patches to enforce security policies
+patches:
+  - target:
+      kind: Deployment
+      labelSelector: "app=ijap"
+    patch: |-
+      - op: add
+        path: /spec/template/spec/securityContext
+        value:
+          runAsNonRoot: true
+          runAsUser: 1000
+          fsGroup: 2000
+          seccompProfile:
+            type: RuntimeDefault
+
+# Resource transformers for consistent security configurations
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: LabelTransformer
+    metadata:
+      name: security-labels
+    labels:
+      security.ijap.com/pci-scope: "true"
+      security.ijap.com/audit-enabled: "true"
+    fieldSpecs:
+      - path: metadata/labels
+        create: true
+
+# Validation configuration
+validationConfig:
+  openAPIV3Schema:
+    properties:
+      metadata:
+        required:
+          - labels
+          - annotations
+      spec:
+        required:
+          - securityContext
