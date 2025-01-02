@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">IJAP</string>
+
+    <!-- Navigation -->
+    <string name="navigation_home">Home</string>
+    <string name="navigation_donations">Donations</string>
+    <string name="navigation_campaigns">Campaigns</string>
+    <string name="navigation_profile">Profile</string>
+
+    <!-- Authentication -->
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_email_hint">Email address</string>
+    <string name="auth_password_hint">Password</string>
+    <string name="auth_two_factor_prompt">Enter verification code</string>
+
+    <!-- Donation -->
+    <string name="donation_amount_hint">Enter amount</string>
+    <string name="donation_currency_label">Currency</string>
+    <string name="donation_payment_method">Payment Method</string>
+    <string name="donation_confirm_button">Confirm Donation</string>
+
+    <!-- Campaign -->
+    <string name="campaign_goal_progress">%1$d%% of goal</string>
+    <string name="campaign_amount_raised">%1$s raised of %2$s</string>
+    <string name="campaign_donate_button">Donate Now</string>
+
+    <!-- Profile -->
+    <string name="profile_edit_profile">Edit Profile</string>
+    <string name="profile_donation_history">Donation History</string>
+    <string name="profile_payment_methods">Payment Methods</string>
+    <string name="profile_settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="settings_language">Language</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_security">Security</string>
+
+    <!-- Common -->
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_error">An error occurred</string>
+    <string name="common_success">Success</string>
+
+    <!-- String Arrays -->
+    <string-array name="donation_amounts">
+        <item>18</item>
+        <item>36</item>
+        <item>100</item>
+        <item>180</item>
+        <item>360</item>
+        <item>1000</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>ILS</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="donation_count">
+        <item quantity="one">1 donation</item>
+        <item quantity="other">%d donations</item>
+    </plurals>
+</resources>
