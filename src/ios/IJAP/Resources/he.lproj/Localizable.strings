@@ -1,0 +1,90 @@
+/* App Name */
+"app_name" = "פלטפורמת האיגוד היהודי הבינלאומי";
+
+/* Common */
+"ok" = "אישור";
+"cancel" = "ביטול";
+"done" = "סיום";
+"back" = "חזרה";
+"next" = "הבא";
+"save" = "שמירה";
+"delete" = "מחיקה";
+"error" = "שגיאה";
+"success" = "הצלחה";
+"loading" = "טוען...";
+
+/* Authentication */
+"login" = "התחברות";
+"register" = "הרשמה";
+"email" = "דוא\"ל";
+"password" = "סיסמה";
+"confirm_password" = "אימות סיסמה";
+"forgot_password" = "שכחת סיסמה?";
+"two_factor_title" = "אימות דו-שלבי";
+"two_factor_message" = "הזן את הקוד שנשלח למכשיר שלך";
+"biometric_prompt" = "השתמש באימות ביומטרי";
+"login_error" = "דוא\"ל או סיסמה לא תקינים";
+"register_success" = "ההרשמה הושלמה בהצלחה";
+
+/* Donations */
+"donate" = "תרומה";
+"amount" = "סכום";
+"currency" = "מטבע";
+"payment_method" = "אמצעי תשלום";
+"donation_frequency" = "תדירות תרומה";
+"one_time" = "חד פעמי";
+"monthly" = "חודשי";
+"annual" = "שנתי";
+"donation_success" = "תודה על תרומתך";
+"donation_failed" = "התרומה נכשלה";
+"min_amount" = "סכום התרומה המינימלי הוא %@";
+"max_amount" = "סכום התרומה המקסימלי הוא %@";
+
+/* Campaigns */
+"active_campaigns" = "קמפיינים פעילים";
+"campaign_details" = "פרטי הקמפיין";
+"goal" = "יעד";
+"raised" = "גויסו %@ מתוך %@";
+"donors" = "תורמים";
+"days_left" = "נותרו %d ימים";
+"campaign_ended" = "הקמפיין הסתיים";
+"share_campaign" = "שתף קמפיין";
+
+/* Associations */
+"search" = "חיפוש עמותות";
+"filter" = "סינון";
+"sort" = "מיון";
+"verified" = "עמותה מאומתת";
+"location" = "מיקום";
+"contact" = "פרטי התקשרות";
+"no_associations" = "לא נמצאו עמותות";
+
+/* Profile */
+"my_profile" = "הפרופיל שלי";
+"edit_profile" = "עריכת פרופיל";
+"donation_history" = "היסטוריית תרומות";
+"payment_methods" = "אמצעי תשלום";
+"preferences" = "העדפות";
+"notifications" = "התראות";
+"language" = "שפה";
+"logout" = "התנתקות";
+
+/* Payment */
+"add_payment_method" = "הוספת אמצעי תשלום";
+"card_number" = "מספר כרטיס";
+"expiry_date" = "תאריך תפוגה";
+"cvv" = "קוד אבטחה";
+"card_holder" = "שם בעל הכרטיס";
+"save_card" = "שמור כרטיס לשימוש עתידי";
+"processing" = "מעבד תשלום";
+"payment_success" = "התשלום הושלם בהצלחה";
+"payment_failed" = "התשלום נכשל";
+
+/* Errors */
+"network_error" = "שגיאת חיבור לרשת";
+"server_error" = "אירעה שגיאת שרת";
+"validation_error" = "אנא בדוק את הפרטים שהזנת";
+"required_field" = "שדה חובה";
+"invalid_email" = "פורמט דוא\"ל לא תקין";
+"password_mismatch" = "הסיסמאות אינן תואמות";
+"weak_password" = "הסיסמה חייבת להכיל לפחות 8 תווים";
