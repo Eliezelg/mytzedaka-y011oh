@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rWf-Yd-hPx">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21701"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <tabBarController id="rWf-Yd-hPx" customClass="MainTabBarController" customModule="IJAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h7f-MI-YBg">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" systemColor="systemBlueColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8Kj-3E-fgM" kind="relationship" relationship="viewControllers" id="pL2-gH-YcF"/>
+                        <segue destination="vXp-q2-dRm" kind="relationship" relationship="viewControllers" id="mNc-fx-h4T"/>
+                        <segue destination="kLf-Hs-wQd" kind="relationship" relationship="viewControllers" id="w3R-g5-6Yh"/>
+                        <segue destination="9Pn-Vx-gf4" kind="relationship" relationship="viewControllers" id="xJf-hY-8Zq"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-713" y="-27"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="wQg-tq-c8q">
+            <objects>
+                <navigationController id="8Kj-3E-fgM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="dWe-nE-JQs">
+                        <accessibilityLabel key="accessibilityLabel" text="Home Tab"/>
+                        <accessibilityHint key="accessibilityHint" text="Shows donation platform home screen"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="UfY-gR-cxP">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YgP-nl-Y7a" kind="relationship" relationship="rootViewController" id="xNf-gh-wRe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfh-VW-2EA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="-446"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="YAE-hc-dxf">
+            <objects>
+                <viewController id="YgP-nl-Y7a" customClass="HomeViewController" customModule="IJAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3c-rm-hfP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8JY-Rg-z4c"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="-446"/>
+        </scene>
+        <!--Donations-->
+        <scene sceneID="wQg-tq-c8r">
+            <objects>
+                <navigationController id="vXp-q2-dRm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Donations" image="gift" catalog="system" selectedImage="gift.fill" id="dWe-nE-JQt">
+                        <accessibilityLabel key="accessibilityLabel" text="Donations Tab"/>
+                        <accessibilityHint key="accessibilityHint" text="Shows your donation history"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="UfY-gR-cxQ">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YgP-nl-Y7b" kind="relationship" relationship="rootViewController" id="xNf-gh-wRf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfh-VW-2EB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="223"/>
+        </scene>
+        <!--Donation History View Controller-->
+        <scene sceneID="YAE-hc-dxg">
+            <objects>
+                <viewController id="YgP-nl-Y7b" customClass="DonationHistoryViewController" customModule="IJAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3c-rm-hfQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Frf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8JY-Rg-z4d"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="223"/>
+        </scene>
+        <!--Campaigns-->
+        <scene sceneID="wQg-tq-c8s">
+            <objects>
+                <navigationController id="kLf-Hs-wQd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Campaigns" image="list.bullet" catalog="system" selectedImage="list.bullet.fill" id="dWe-nE-JQu">
+                        <accessibilityLabel key="accessibilityLabel" text="Campaigns Tab"/>
+                        <accessibilityHint key="accessibilityHint" text="Shows active donation campaigns"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="UfY-gR-cxR">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YgP-nl-Y7c" kind="relationship" relationship="rootViewController" id="xNf-gh-wRg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfh-VW-2EC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="892"/>
+        </scene>
+        <!--Campaigns List View Controller-->
+        <scene sceneID="YAE-hc-dxh">
+            <objects>
+                <viewController id="YgP-nl-Y7c" customClass="CampaignsListViewController" customModule="IJAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3c-rm-hfR">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Frg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8JY-Rg-z4e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="892"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="wQg-tq-c8t">
+            <objects>
+                <navigationController id="9Pn-Vx-gf4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="dWe-nE-JQv">
+                        <accessibilityLabel key="accessibilityLabel" text="Profile Tab"/>
+                        <accessibilityHint key="accessibilityHint" text="Shows your profile settings"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="UfY-gR-cxS">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YgP-nl-Y7d" kind="relationship" relationship="rootViewController" id="xNf-gh-wRh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfh-VW-2ED" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="1561"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="YAE-hc-dxi">
+            <objects>
+                <viewController id="YgP-nl-Y7d" customClass="ProfileViewController" customModule="IJAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3c-rm-hfS">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Frh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8JY-Rg-z4f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="1561"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gift" catalog="system" width="128" height="128"/>
+        <image name="gift.fill" catalog="system" width="128" height="128"/>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <image name="list.bullet.fill" catalog="system" width="128" height="87"/>
+        <image name="person" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
