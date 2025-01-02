@@ -1,0 +1,26 @@
+# Kubernetes Service manifest for Prometheus monitoring server
+# Version: v1.24+
+# Purpose: Exposes Prometheus metrics collection endpoint within the cluster
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: monitoring
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
+
+spec:
+  type: ClusterIP
+  selector:
+    app: prometheus
+    component: monitoring
+  ports:
+    - name: http
+      port: 9090
+      targetPort: 9090
+      protocol: TCP
