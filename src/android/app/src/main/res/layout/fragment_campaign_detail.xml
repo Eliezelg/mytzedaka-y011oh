@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Campaign Detail Fragment Layout
+    Material Design version: 1.9.0
+    Supports RTL layouts and WCAG 2.1 Level AA compliance
+    Implements responsive design with proper touch targets
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:layoutDirection="locale"
+    android:importantForAccessibility="yes">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
+        android:importantForAccessibility="yes"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/campaignImagesPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/campaign_image_height"
+                android:contentDescription="@string/campaign_images_description"
+                android:importantForAccessibility="yes"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/campaignTitle"
+                style="@style/TextAppearance.App.Headline1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_medium"
+                android:paddingEnd="@dimen/spacing_medium"
+                android:paddingTop="@dimen/spacing_medium"
+                android:minHeight="@dimen/accessibility_touch_target_min"
+                android:textAlignment="viewStart"
+                tools:text="Campaign Title"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/campaignDescription"
+                style="@style/TextAppearance.App"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_medium"
+                android:paddingEnd="@dimen/spacing_medium"
+                android:paddingTop="@dimen/spacing_small"
+                android:textAlignment="viewStart"
+                tools:text="Campaign description"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_medium">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/campaignProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/campaign_progress_description"
+                    app:trackCornerRadius="4dp"
+                    app:trackThickness="8dp"
+                    app:indicatorColor="@color/primary"
+                    app:trackColor="@color/divider_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/spacing_small">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/campaignAmount"
+                        style="@style/TextAppearance.App.Headline2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="viewStart"
+                        tools:text="$15,000 raised"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/campaignGoal"
+                        style="@style/TextAppearance.App"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewEnd"
+                        tools:text="of $20,000 goal"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_medium"
+        android:elevation="8dp"
+        android:background="@color/surface_light"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/donateButton"
+            style="@style/Widget.App.Button.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:text="@string/donate_now"
+            android:minHeight="@dimen/accessibility_touch_target_min"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shareButton"
+            style="@style/Widget.App.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            android:contentDescription="@string/share_campaign"
+            app:icon="@drawable/ic_share"
+            app:iconGravity="textStart"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
