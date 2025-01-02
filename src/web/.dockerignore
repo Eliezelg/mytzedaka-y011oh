@@ -1,0 +1,75 @@
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Version control
+.git
+.gitignore
+
+# Environment files - except production
+.env*
+!.env.production
+
+# IDE and editor files
+.idea
+.vscode
+*.swp
+*.swo
+
+# SSL/TLS and security files
+*.pem
+*.key
+*.crt
+*.csr
+*.der
+*.p12
+*.pfx
+
+# Test files and coverage reports
+__tests__
+*.test.ts
+*.test.tsx
+cypress
+coverage
+.nyc_output
+
+# Development configuration
+*.config.js
+!webpack.config.js
+!babel.config.js
+.eslintrc*
+.prettierrc*
+jest.config.*
+tsconfig.*
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Docker files
+Dockerfile*
+.dockerignore
+
+# Build artifacts and cache
+build
+dist
+.cache
+.webpack
+.next
+
+# Temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Required application files
+!src
+!public
+!locales
+!package.json
+!yarn.lock
+!nginx.conf
