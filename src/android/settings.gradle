@@ -1,0 +1,23 @@
+// Project name for the International Jewish Association Donation Platform Android app
+rootProject.name = 'IJAP'
+
+// Configure plugin management repositories
+pluginManagement {
+    repositories {
+        google()       // Android Gradle Plugin repository
+        mavenCentral() // Maven Central repository
+        gradlePluginPortal() // Gradle plugin portal for additional plugins
+    }
+}
+
+// Configure dependency resolution repositories
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()       // Android dependencies repository
+        mavenCentral() // Maven Central repository for third-party libraries
+    }
+}
+
+// Include the main application module
+include ':app'
