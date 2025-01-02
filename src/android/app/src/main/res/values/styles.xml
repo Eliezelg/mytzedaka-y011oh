@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    IJAP Android App Styles
+    Material Design Components version: 1.9.0
+    Implements Material Design 3.0 principles with Jewish cultural elements
+    Supports RTL layouts and WCAG 2.1 Level AA compliance
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base text appearance styles -->
+    <style name="TextAppearance.App" parent="TextAppearance.Material3.Body1">
+        <!-- Default text appearance attributes -->
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Primary headline style -->
+    <style name="TextAppearance.App.Headline1" parent="TextAppearance.Material3.Headline1">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:accessibilityHeading">true</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <!-- Secondary headline style -->
+    <style name="TextAppearance.App.Headline2" parent="TextAppearance.Material3.Headline2">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:accessibilityHeading">true</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <!-- Base widget styles -->
+    <style name="Widget.App" parent="Widget.Material3.Button">
+        <!-- Default widget attributes -->
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!-- Primary button style -->
+    <style name="Widget.App.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">88dp</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:contentDescription">@string/button_primary_description</item>
+    </style>
+
+    <!-- Secondary button style -->
+    <style name="Widget.App.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:background">transparent</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:strokeColor">@color/secondary</item>
+        <item name="android:strokeWidth">1dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">88dp</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:contentDescription">@string/button_secondary_description</item>
+    </style>
+
+</resources>
