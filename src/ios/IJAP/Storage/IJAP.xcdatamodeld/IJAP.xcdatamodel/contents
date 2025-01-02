@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="NO" userDefinedModelVersionIdentifier="1.0">
+    <entity name="AssociationEntity" representedClassName="AssociationEntity" syncable="YES">
+        <attribute name="address" attributeType="Transformable" valueTransformerName="SecureAddressTransformer" customClassName="AssociationAddress"/>
+        <attribute name="categories" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="currencyPreferences" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="descriptionText" optional="YES" attributeType="Transformable" valueTransformerName="LocalizedTextTransformer" customClassName="[String:String]"/>
+        <attribute name="email" attributeType="String" minValueString="5" maxValueString="255" regularExpressionString="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}" spotlightIndexingEnabled="YES"/>
+        <attribute name="id" attributeType="String" minValueString="36" maxValueString="36" regularExpressionString="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"/>
+        <attribute name="isVerified" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" indexed="YES"/>
+        <attribute name="legalInfo" attributeType="Transformable" valueTransformerName="SecureLegalInfoTransformer" customClassName="AssociationLegalInfo"/>
+        <attribute name="name" attributeType="String" minValueString="2" maxValueString="255" spotlightIndexingEnabled="YES"/>
+        <attribute name="phone" attributeType="String" minValueString="10" maxValueString="20" regularExpressionString="^\+[1-9]\d{1,14}$"/>
+        <attribute name="primaryLanguage" attributeType="String" defaultValueString="en" regularExpressionString="^[a-z]{2}(-[A-Z]{2})?$"/>
+        <attribute name="registrationNumber" attributeType="String"/>
+        <attribute name="securityLevel" attributeType="String" defaultValueString="CONFIDENTIAL"/>
+        <attribute name="status" attributeType="String" defaultValueString="PENDING" indexed="YES"/>
+        <attribute name="supportedLanguages" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="taxId" attributeType="String"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="website" optional="YES" attributeType="URI"/>
+        <relationship name="campaigns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CampaignEntity" inverseName="association" inverseEntity="CampaignEntity"/>
+        <relationship name="donations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DonationEntity" inverseName="association" inverseEntity="DonationEntity"/>
+        <fetchIndex name="byIdIndex">
+            <fetchIndexElement property="id" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byNameIndex">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byStatusIndex">
+            <fetchIndexElement property="status" type="Binary" order="ascending"/>
+            <fetchIndexElement property="updatedAt" type="Binary" order="descending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
+                <constraint value="registrationNumber"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CampaignEntity" representedClassName="CampaignEntity" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="currency" attributeType="String" minValueString="3" maxValueString="3" regularExpressionString="^[A-Z]{3}$"/>
+        <attribute name="currentAmount" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="descriptionText" attributeType="String"/>
+        <attribute name="donorCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="goalAmount" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="id" attributeType="String" minValueString="36" maxValueString="36"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="isLottery" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" indexed="YES"/>
+        <attribute name="lotteryDetails" optional="YES" attributeType="Transformable" valueTransformerName="SecureLotteryDetailsTransformer" customClassName="CampaignLotteryDetails"/>
+        <attribute name="metadata" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String:Any]"/>
+        <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="status" attributeType="String" defaultValueString="PENDING" indexed="YES"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="title" attributeType="String" minValueString="1" maxValueString="255"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <relationship name="association" maxCount="1" deletionRule="Nullify" destinationEntity="AssociationEntity" inverseName="campaigns" inverseEntity="AssociationEntity"/>
+        <relationship name="donations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DonationEntity" inverseName="campaign" inverseEntity="DonationEntity"/>
+        <fetchIndex name="byDateIndex">
+            <fetchIndexElement property="startDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="endDate" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byIdIndex">
+            <fetchIndexElement property="id" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DonationEntity" representedClassName="DonationEntity" syncable="YES">
+        <attribute name="amount" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="currency" attributeType="String" minValueString="3" maxValueString="3"/>
+        <attribute name="id" attributeType="String" minValueString="36" maxValueString="36"/>
+        <attribute name="isAnonymous" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="metadata" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String:Any]"/>
+        <attribute name="paymentMethod" attributeType="String"/>
+        <attribute name="receiptNumber" optional="YES" attributeType="String"/>
+        <attribute name="status" attributeType="String" defaultValueString="PENDING" indexed="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <relationship name="association" maxCount="1" deletionRule="Nullify" destinationEntity="AssociationEntity" inverseName="donations" inverseEntity="AssociationEntity"/>
+        <relationship name="campaign" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CampaignEntity" inverseName="donations" inverseEntity="CampaignEntity"/>
+        <relationship name="donor" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="donations" inverseEntity="UserEntity"/>
+        <fetchIndex name="byIdIndex">
+            <fetchIndexElement property="id" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
+                <constraint value="transactionId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <attribute name="email" attributeType="String" minValueString="5" maxValueString="255"/>
+        <attribute name="id" attributeType="String" minValueString="36" maxValueString="36"/>
+        <attribute name="languagePreference" attributeType="String" defaultValueString="en"/>
+        <attribute name="lastLoginAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" minValueString="2" maxValueString="255"/>
+        <attribute name="preferredCurrency" attributeType="String" defaultValueString="USD"/>
+        <attribute name="status" attributeType="String" defaultValueString="ACTIVE" indexed="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" indexed="YES"/>
+        <relationship name="donations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DonationEntity" inverseName="donor" inverseEntity="DonationEntity"/>
+        <fetchIndex name="byEmailIndex">
+            <fetchIndexElement property="email" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byIdIndex">
+            <fetchIndexElement property="id" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
+                <constraint value="email"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>
