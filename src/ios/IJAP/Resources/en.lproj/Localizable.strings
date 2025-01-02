@@ -1,0 +1,122 @@
+/* Common */
+"app_name" = "International Jewish Association Platform";
+"ok" = "OK";
+"cancel" = "Cancel";
+"done" = "Done";
+"back" = "Back";
+"next" = "Next";
+"save" = "Save";
+"delete" = "Delete";
+"error" = "Error";
+"success" = "Success";
+"loading" = "Loading...";
+"retry" = "Try Again";
+"close" = "Close";
+"edit" = "Edit";
+"share" = "Share";
+"continue" = "Continue";
+"accessibility_loading" = "Please wait while content loads";
+
+/* Authentication */
+"login" = "Login";
+"register" = "Register";
+"email" = "Email";
+"password" = "Password";
+"confirm_password" = "Confirm Password";
+"forgot_password" = "Forgot Password?";
+"two_factor_title" = "Two-Factor Authentication";
+"two_factor_message" = "Enter the code sent to your device";
+"biometric_prompt" = "Use Biometric Authentication";
+"login_error" = "Invalid email or password";
+"register_success" = "Registration successful";
+"accessibility_password_field" = "Password input field, must be at least 8 characters";
+"accessibility_biometric" = "Use Face ID or Touch ID to login";
+
+/* Donations */
+"donate" = "Donate";
+"amount" = "Amount";
+"currency" = "Currency";
+"payment_method" = "Payment Method";
+"donation_frequency" = "Donation Frequency";
+"one_time" = "One Time";
+"monthly" = "Monthly";
+"annual" = "Annual";
+"donation_success" = "Thank you for your donation";
+"donation_failed" = "Donation failed";
+"min_amount" = "Minimum donation amount is %@";
+"max_amount" = "Maximum donation amount is %@";
+"processing_donation" = "Processing your donation...";
+"donation_summary" = "Donation Summary";
+"donation_receipt" = "Donation Receipt";
+"accessibility_amount_field" = "Enter donation amount in %@";
+"empty_donations" = "No donations yet";
+
+/* Campaigns */
+"active_campaigns" = "Active Campaigns";
+"campaign_details" = "Campaign Details";
+"goal" = "Goal";
+"raised" = "%@ raised of %@";
+"donors" = "Donors";
+"days_left" = "%d days left";
+"campaign_ended" = "Campaign ended";
+"share_campaign" = "Share Campaign";
+"campaign_progress" = "%d%% to goal";
+"campaign_start_date" = "Started on %@";
+"campaign_end_date" = "Ends on %@";
+"accessibility_progress" = "Campaign is %d percent complete";
+"empty_campaigns" = "No active campaigns";
+
+/* Associations */
+"search" = "Search Associations";
+"filter" = "Filter";
+"sort" = "Sort";
+"verified" = "Verified Association";
+"location" = "Location";
+"contact" = "Contact Information";
+"no_associations" = "No associations found";
+"sort_name" = "Sort by Name";
+"sort_date" = "Sort by Date";
+"sort_popularity" = "Sort by Popularity";
+"accessibility_verified" = "This is a verified association";
+"empty_search" = "No results found for '%@'";
+
+/* Profile */
+"my_profile" = "My Profile";
+"edit_profile" = "Edit Profile";
+"donation_history" = "Donation History";
+"payment_methods" = "Payment Methods";
+"preferences" = "Preferences";
+"notifications" = "Notifications";
+"language" = "Language";
+"logout" = "Logout";
+"profile_updated" = "Profile updated successfully";
+"delete_account" = "Delete Account";
+"delete_confirmation" = "Are you sure you want to delete your account?";
+"accessibility_profile_image" = "Profile picture, double tap to change";
+
+/* Payment */
+"add_payment_method" = "Add Payment Method";
+"card_number" = "Card Number";
+"expiry_date" = "Expiry Date";
+"cvv" = "CVV";
+"card_holder" = "Card Holder Name";
+"save_card" = "Save card for later";
+"processing" = "Processing Payment";
+"payment_success" = "Payment Successful";
+"payment_failed" = "Payment Failed";
+"card_ending" = "Card ending in %@";
+"expires" = "Expires %@";
+"accessibility_card_field" = "Enter card number, spaces will be added automatically";
+"empty_payment_methods" = "No saved payment methods";
+
+/* Errors */
+"network_error" = "Network connection error";
+"server_error" = "Server error occurred";
+"validation_error" = "Please check your information";
+"required_field" = "This field is required";
+"invalid_email" = "Invalid email format";
+"password_mismatch" = "Passwords do not match";
+"weak_password" = "Password must be at least 8 characters";
+"session_expired" = "Your session has expired, please login again";
+"generic_error" = "Something went wrong, please try again";
+"accessibility_error" = "Error: %@";
