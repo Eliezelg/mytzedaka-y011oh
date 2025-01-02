@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    <!-- Character Encoding -->
+    <meta charset="utf-8">
+    
+    <!-- Viewport Configuration -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="theme-color" content="#1976D2">
+    <meta name="description" content="International Jewish Association Donation Platform - Secure and efficient charitable giving platform for Jewish associations worldwide">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
+                   style-src 'self' 'unsafe-inline';
+                   img-src 'self' data: https:;
+                   connect-src 'self' https://api.stripe.com https://api.tranzilla.com">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="logo192.png">
+    
+    <!-- iOS Specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="IJAP">
+    
+    <!-- Language Alternatives -->
+    <link rel="alternate" hreflang="en" href="https://example.com/en">
+    <link rel="alternate" hreflang="he" href="https://example.com/he">
+    <link rel="alternate" hreflang="fr" href="https://example.com/fr">
+    
+    <title>International Jewish Association Donation Platform</title>
+</head>
+<body>
+    <!-- React Mount Point -->
+    <div id="root" role="main"></div>
+    
+    <!-- No JavaScript Warning -->
+    <noscript>
+        <div role="alert" style="padding: 20px; text-align: center; font-family: system-ui, -apple-system, sans-serif;">
+            <h1>JavaScript Required</h1>
+            <p>Please enable JavaScript to use the International Jewish Association Donation Platform.</p>
+            <p>יש להפעיל JavaScript כדי להשתמש בפלטפורמת התרומות</p>
+            <p>Veuillez activer JavaScript pour utiliser la plateforme de dons</p>
+        </div>
+    </noscript>
+    
+    <!-- Application Entry Point -->
+    <script type="module" src="./src/index.tsx"></script>
+</body>
+</html>
