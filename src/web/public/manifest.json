@@ -1,0 +1,102 @@
+{
+  "name": "International Jewish Association Donation Platform",
+  "short_name": "IJAP",
+  "description": "Unified platform for Jewish charitable giving with global reach and local compliance",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1976D2",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Donation Platform on Mobile"
+    },
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Donation Platform on Desktop"
+    }
+  ],
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "dir": "auto",
+  "categories": ["finance", "social"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "Make Donation",
+      "url": "/donate",
+      "description": "Start a new donation",
+      "icons": [
+        {
+          "src": "donate-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Campaigns",
+      "url": "/campaigns", 
+      "description": "Browse active campaigns",
+      "icons": [
+        {
+          "src": "campaigns-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+ijap",
+      "url": "/protocol?type=%s"
+    }
+  ],
+  "iarc_rating_id": "pending",
+  "serviceworker": {
+    "src": "/service-worker.js",
+    "scope": "/",
+    "update_via_cache": "none"
+  }
+}
