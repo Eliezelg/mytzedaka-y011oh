@@ -1,0 +1,65 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": false,
+    "tsConfigPath": "tsconfig.build.json",
+    "assets": [
+      {
+        "include": "**/*.proto",
+        "watchAssets": true,
+        "outDir": "dist/proto"
+      },
+      {
+        "include": "i18n/**/*",
+        "watchAssets": true,
+        "outDir": "dist/i18n"
+      },
+      {
+        "include": "templates/**/*",
+        "watchAssets": true,
+        "outDir": "dist/templates"
+      },
+      {
+        "include": "payment/**/*.cert",
+        "watchAssets": true,
+        "outDir": "dist/payment"
+      }
+    ],
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "classValidatorShim": true,
+          "introspectComments": true,
+          "dtoFileNameSuffix": [
+            ".dto.ts",
+            ".entity.ts",
+            ".model.ts",
+            ".interface.ts"
+          ],
+          "controllerFileNameSuffix": [
+            ".controller.ts"
+          ],
+          "documentBuilder": {
+            "title": "Jewish Association Donation Platform API",
+            "description": "API documentation for donation processing and campaign management",
+            "version": "1.0",
+            "tags": [
+              "donations",
+              "campaigns",
+              "associations",
+              "payments"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "generateOptions": {
+    "spec": true,
+    "flat": false,
+    "specFileSuffix": ".spec"
+  }
+}
