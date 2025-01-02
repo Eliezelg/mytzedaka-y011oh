@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ijap-api
+spec:
+  # Increase replicas for production high availability
+  replicas: 5
+  template:
+    spec:
+      containers:
+      - name: api
+        # Production-grade resource allocation for high performance
+        resources:
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+          limits:
+            cpu: "4" 
+            memory: "8Gi"
+        # Enhanced health check configuration for production
+        livenessProbe:
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+      # Ensure pods are distributed across availability zones
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: ijap
+            component: api
+      # Enforce pod anti-affinity for high availability
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: ijap
+                component: api
+            topologyKey: kubernetes.io/hostname
