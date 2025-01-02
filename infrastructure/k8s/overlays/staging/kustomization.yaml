@@ -1,0 +1,62 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Reference base configuration
+resources:
+  - ../../base
+
+# Staging environment prefix
+namePrefix: staging-
+
+# Common labels for staging environment
+commonLabels:
+  app: ijap
+  environment: staging
+  managed-by: kustomize
+  version: latest
+
+# Common annotations for staging environment
+commonAnnotations:
+  app.kubernetes.io/part-of: ijap-platform
+  app.kubernetes.io/environment: staging
+  app.kubernetes.io/managed-by: kustomize
+  security.ijap.com/audit-level: strict
+  monitoring.ijap.com/enabled: true
+  monitoring.ijap.com/scrape: true
+  monitoring.ijap.com/port: "9090"
+  security.ijap.com/scan-level: enhanced
+  backup.ijap.com/enabled: true
+  backup.ijap.com/retention: 7d
+
+# Apply staging-specific patches
+patches:
+  - path: patch-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: ijap-config
+  - path: patch-deployment.yaml
+    target:
+      kind: Deployment
+      name: ijap-api
+
+# Generate staging-specific ConfigMap
+configMapGenerator:
+  - name: staging-config
+    behavior: merge
+    literals:
+      - ENVIRONMENT=staging
+      - LOG_LEVEL=debug
+      - MONITORING_ENABLED=true
+      - TRACING_ENABLED=true
+      - PAYMENT_MODE=sandbox
+      - DEBUG_MODE=true
+      - API_TIMEOUT=30s
+      - MAX_RETRIES=3
+
+# Generator options
+generatorOptions:
+  disableNameSuffixHash: false
+  labels:
+    generated-by: kustomize
+    environment: staging
+    timestamp: "{{.Timestamp}}"
