@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:tint="@color/primary">
+
+    <group
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateX="22"
+        android:translateY="22">
+        
+        <!-- Star of David design for Jewish donation platform -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M64,32l12,20.8l12,20.8H40l12,-20.8L64,32zM40,73.6h48L64,32L40,73.6zM64,32l-24,41.6h48L64,32z"/>
+            
+        <!-- Donation hand symbol -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M52,60c-1.1,0 -2,0.9 -2,2s0.9,2 2,2s2,-0.9 2,-2S53.1,60 52,60zM60,56c-1.1,0 -2,0.9 -2,2s0.9,2 2,2s2,-0.9 2,-2S61.1,56 60,56zM68,56c-1.1,0 -2,0.9 -2,2s0.9,2 2,2s2,-0.9 2,-2S69.1,56 68,56zM76,60c-1.1,0 -2,0.9 -2,2s0.9,2 2,2s2,-0.9 2,-2S77.1,60 76,60zM64,44c-8.8,0 -16,7.2 -16,16s7.2,16 16,16s16,-7.2 16,-16S72.8,44 64,44zM64,72c-6.6,0 -12,-5.4 -12,-12s5.4,-12 12,-12s12,5.4 12,12S70.6,72 64,72z"/>
+    </group>
+</vector>
