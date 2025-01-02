@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="donation"
+            type="com.ijap.app.data.models.Donation" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginVertical="@dimen/spacing_small"
+        android:clickable="true"
+        android:focusable="true"
+        android:layoutDirection="locale"
+        android:stateListAnimator="@animator/card_state_list_anim"
+        android:contentDescription="@{@string/donation_card_description(donation.associationName, donation.getFormattedAmount())}"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardBackgroundColor="?attr/colorSurface">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            android:padding="@dimen/spacing_medium">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_association_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{donation.associationName}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="?attr/colorOnSurface"
+                android:textDirection="locale"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@{@string/association_name_description(donation.associationName)}"
+                app:layout_constraintEnd_toStartOf="@id/tv_donation_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_donation_date"
+                tools:text="Association Name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_donation_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:text="@{donation.getFormattedDate()}"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textDirection="locale"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@{@string/donation_date_description(donation.getFormattedDate())}"
+                app:layout_constraintEnd_toStartOf="@id/tv_donation_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_association_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="October 25, 2023" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_donation_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{donation.getFormattedAmount()}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:textDirection="locale"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@{@string/donation_amount_description(donation.getFormattedAmount())}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="$180.00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
