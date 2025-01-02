@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger
+  namespace: monitoring
+  labels:
+    app: jaeger
+    component: tracing
+    part-of: observability
+    managed-by: kubernetes
+  annotations:
+    description: Exposes Jaeger tracing endpoints for distributed tracing collection and querying
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "16686"
+spec:
+  type: ClusterIP
+  selector:
+    app: jaeger
+    component: tracing
+  ports:
+    # Agent ports for receiving spans
+    - name: agent-udp
+      port: 5775
+      protocol: UDP
+      targetPort: 5775
+      appProtocol: jaeger-agent-udp
+    - name: agent-thrift
+      port: 6831
+      protocol: UDP
+      targetPort: 6831
+      appProtocol: jaeger-agent-thrift
+    - name: agent-binary
+      port: 6832
+      protocol: UDP
+      targetPort: 6832
+      appProtocol: jaeger-agent-binary
+    - name: agent-http
+      port: 5778
+      protocol: TCP
+      targetPort: 5778
+      appProtocol: jaeger-agent-http
+    # Query UI and API port
+    - name: query
+      port: 16686
+      protocol: TCP
+      targetPort: 16686
+      appProtocol: jaeger-query-http
+    # Collector ports for receiving spans
+    - name: collector-grpc
+      port: 14250
+      protocol: TCP
+      targetPort: 14250
+      appProtocol: jaeger-collector-grpc
+    - name: collector-http
+      port: 14268
+      protocol: TCP
+      targetPort: 14268
+      appProtocol: jaeger-collector-http
+    # Zipkin compatible endpoint
+    - name: zipkin
+      port: 9411
+      protocol: TCP
+      targetPort: 9411
+      appProtocol: zipkin-http
+  sessionAffinity: None
+  ipFamilyPolicy: PreferDualStack
+  internalTrafficPolicy: Cluster
