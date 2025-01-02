@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "firebase_project_number",
+    "project_id": "ijap-donation-platform",
+    "storage_bucket": "ijap-donation-platform.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "mobilesdk_app_id_value",
+        "android_client_info": {
+          "package_name": "com.ijap.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_type": 1,
+          "client_id": "oauth_web_client_id"
+        },
+        {
+          "client_type": 3,
+          "client_id": "web_client_id"
+        },
+        {
+          "client_type": 2,
+          "client_id": "ios_client_id",
+          "ios_info": {
+            "bundle_id": "com.ijap.app"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "android_api_key_value"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-tracking-id"
+          }
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "web_client_id",
+              "client_type": 3
+            },
+            {
+              "client_id": "ios_client_id",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ijap.app",
+                "app_store_id": "app_store_id"
+              }
+            }
+          ]
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": [
+            {
+              "bundle_id": "com.ijap.app",
+              "team_id": "apple_team_id",
+              "key_id": "apns_key_id",
+              "token_key": "apns_token_key"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
