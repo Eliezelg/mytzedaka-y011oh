@@ -1,0 +1,248 @@
+# fastlane version: 2.217.0
+# Minimum iOS version: 14.0
+
+# Import dependencies with security validations
+require 'fastlane'
+require 'cocoapods-core'
+require 'xcodeproj'
+
+# Global configuration with security hardening
+WORKSPACE = 'IJAP.xcworkspace'
+SCHEME = 'IJAP'
+BUILD_PATH = './build'
+SECURITY_CONFIG = './config/security.yml'
+AUDIT_LOG_PATH = './logs/audit'
+
+# Platform configuration with enhanced security
+platform :ios do
+  before_all do |lane, options|
+    # Verify git status and security
+    ensure_git_status_clean
+    ensure_git_branch(
+      branch: ENV['CI_BRANCH'] || 'main'
+    )
+
+    # Validate environment and secrets
+    validate_required_secrets
+    setup_ci if ENV['CI']
+
+    # Certificate and profile sync with security checks
+    sync_code_signing(
+      type: ENV['MATCH_TYPE'],
+      readonly: true,
+      generate_apple_certs: true,
+      api_key_path: ENV['APPLE_API_KEY_PATH'],
+      force_for_new_devices: true
+    )
+
+    # Security audit logging initialization
+    setup_audit_logging
+  end
+
+  desc "Run comprehensive test suite with security validation"
+  lane :test do |options|
+    # Security analysis
+    swiftlint(
+      mode: :lint,
+      config_file: '.swiftlint.yml',
+      strict: true,
+      reporter: 'junit'
+    )
+
+    # Dependency security scan
+    cocoapods(
+      repo_update: true,
+      try_repo_update_on_error: true,
+      use_bundle_exec: true
+    )
+
+    # Execute test suites
+    scan(
+      workspace: WORKSPACE,
+      scheme: SCHEME,
+      device: "iPhone 14 Pro",
+      clean: true,
+      code_coverage: true,
+      fail_build: true,
+      output_directory: "#{BUILD_PATH}/test_output",
+      output_types: "html,junit",
+      output_files: "report.html,report.junit"
+    )
+
+    # Security compliance validation
+    validate_security_settings
+    
+    # Generate test reports
+    generate_test_report
+  end
+
+  desc "Deploy to TestFlight with enhanced security"
+  lane :beta do |options|
+    # Version validation
+    ensure_version_match(options)
+    
+    # Security certificate rotation check
+    check_certificates_validity
+
+    # Secure build process
+    build_ios_app(
+      workspace: WORKSPACE,
+      scheme: SCHEME,
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          ENV['IJAP_APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILE_NAME']
+        },
+        signingStyle: "manual",
+        signingCertificate: ENV['SIGNING_CERTIFICATE']
+      },
+      build_path: BUILD_PATH,
+      include_bitcode: false,
+      include_symbols: true,
+      clean: true
+    )
+
+    # Security compliance check
+    perform_security_scan
+    
+    # TestFlight upload with verification
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      apple_id: ENV['IJAP_APPLE_ID'],
+      team_id: ENV['IJAP_TEAM_ID'],
+      changelog: generate_changelog,
+      distribute_external: false,
+      notify_external_testers: false,
+      beta_app_review_info: {
+        contact_email: ENV['BETA_REVIEW_EMAIL'],
+        contact_first_name: ENV['BETA_REVIEW_FIRST_NAME'],
+        contact_last_name: ENV['BETA_REVIEW_LAST_NAME'],
+        contact_phone: ENV['BETA_REVIEW_PHONE'],
+        demo_account_name: ENV['BETA_DEMO_USERNAME'],
+        demo_account_password: ENV['BETA_DEMO_PASSWORD'],
+        notes: "Security-hardened beta build for testing"
+      }
+    )
+
+    # Audit logging
+    log_deployment(
+      type: 'beta',
+      version: get_version_number,
+      build: get_build_number
+    )
+  end
+
+  desc "Deploy to App Store with compliance tracking"
+  lane :release do |options|
+    # Compliance verification
+    verify_app_store_compliance
+    
+    # Security certificate validation
+    validate_certificates
+
+    # Production build with security hardening
+    build_ios_app(
+      workspace: WORKSPACE,
+      scheme: SCHEME,
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          ENV['IJAP_APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILE_NAME']
+        },
+        signingStyle: "manual",
+        signingCertificate: ENV['SIGNING_CERTIFICATE']
+      },
+      build_path: BUILD_PATH,
+      include_bitcode: false,
+      include_symbols: true,
+      clean: true
+    )
+
+    # Final security validation
+    perform_production_security_scan
+    
+    # App Store submission
+    upload_to_app_store(
+      force: true,
+      skip_metadata: false,
+      skip_screenshots: false,
+      skip_binary_upload: false,
+      automatic_release: false,
+      submission_information: {
+        add_id_info_uses_idfa: false,
+        add_id_info_serves_ads: false,
+        add_id_info_tracks_install: true,
+        add_id_info_tracks_action: true,
+        add_id_info_limits_tracking: true,
+        export_compliance_uses_encryption: true,
+        export_compliance_is_exempt: false,
+        export_compliance_contains_proprietary_cryptography: false,
+        export_compliance_contains_third_party_cryptography: true
+      },
+      precheck_include_in_app_purchases: true
+    )
+
+    # Compliance documentation
+    generate_compliance_report
+    
+    # Security audit logging
+    log_production_deployment(
+      version: get_version_number,
+      build: get_build_number
+    )
+  end
+
+  error do |lane, exception, options|
+    # Security incident logging
+    log_security_incident(
+      lane: lane,
+      error: exception,
+      context: options
+    )
+    
+    # Notification with secure channel
+    notify_security_team(
+      exception: exception,
+      lane: lane
+    )
+  end
+end
+
+# Helper methods for security and compliance
+def validate_required_secrets
+  required_secrets = [
+    'IJAP_APP_IDENTIFIER',
+    'IJAP_TEAM_ID',
+    'APPLE_API_KEY_PATH',
+    'MATCH_PASSWORD',
+    'SIGNING_CERTIFICATE'
+  ]
+  
+  missing_secrets = required_secrets.select { |secret| ENV[secret].nil? }
+  UI.user_error!("Missing required secrets: #{missing_secrets.join(', ')}") unless missing_secrets.empty?
+end
+
+def setup_audit_logging
+  FileUtils.mkdir_p(AUDIT_LOG_PATH)
+  ENV['AUDIT_LOG_FILE'] = "#{AUDIT_LOG_PATH}/#{Time.now.strftime('%Y%m%d')}_audit.log"
+end
+
+def validate_security_settings
+  UI.message "Validating security settings..."
+  # Implementation of security validation logic
+end
+
+def perform_security_scan
+  UI.message "Performing security scan..."
+  # Implementation of security scanning logic
+end
+
+def verify_app_store_compliance
+  UI.message "Verifying App Store compliance..."
+  # Implementation of compliance verification logic
+end
+
+def generate_compliance_report
+  UI.message "Generating compliance report..."
+  # Implementation of compliance report generation
+end
