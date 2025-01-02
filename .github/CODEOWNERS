@@ -1,0 +1,32 @@
+*                                    @global-maintainers
+
+# Mobile applications
+src/android/**                       @mobile-team @android-leads
+src/ios/**                          @mobile-team @ios-leads
+
+# Backend services
+src/backend/**                      @backend-team @api-leads
+**/api/**                          @api-team @backend-leads
+**/database/**                     @backend-team @data-team
+**/auth/**                         @backend-team @security-team
+
+# Frontend application
+src/web/**                         @frontend-team @web-leads
+
+# Infrastructure and deployment
+infrastructure/**                  @devops-team @platform-leads
+.github/workflows/**               @devops-team @ci-leads
+
+# Security-sensitive components
+**/*.security.*                    @security-team
+**/payment/**                      @payment-team @security-team
+
+# Business domain components
+**/donation/**                     @donation-team
+
+# Documentation and localization
+**/docs/**                         @docs-team @technical-writers
+**/localization/**                 @i18n-team
+
+# The CODEOWNERS file itself requires DevOps and Security review
+.github/CODEOWNERS                 @devops-team @security-team @global-maintainers
