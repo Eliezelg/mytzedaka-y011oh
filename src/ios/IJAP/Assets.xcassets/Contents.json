@@ -1,0 +1,51 @@
+{
+  "info": {
+    "version": 1,
+    "author": "xcode"
+  },
+  "properties": {
+    "provides-namespace": true
+  },
+  "color-management": {
+    "color-space": "srgb",
+    "pixel-format": "rgba8",
+    "color-profile": "display-p3",
+    "rendering-intent": "default"
+  },
+  "device-specific": {
+    "idioms": [
+      "iphone",
+      "ipad",
+      "ios-marketing"
+    ],
+    "scale-factors": [
+      "1x",
+      "2x",
+      "3x"
+    ],
+    "size-classes": [
+      "compact",
+      "regular"
+    ],
+    "display-gamut": [
+      "sRGB",
+      "displayP3"
+    ]
+  },
+  "optimization": {
+    "template-rendering": false,
+    "preserves-vector-representation": false,
+    "compression": "automatic",
+    "memory-management": "aggressive"
+  },
+  "metadata": {
+    "author": "IJAP Development Team",
+    "creation-date": "2023",
+    "build-target": "production",
+    "accessibility": {
+      "supports-dark-mode": true,
+      "dynamic-type-support": true,
+      "rtl-support": true
+    }
+  }
+}
