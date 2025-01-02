@@ -1,0 +1,138 @@
+# Kubernetes version: v1.24+
+# Production environment Kustomize configuration for International Jewish Association Donation Platform
+# Implements high availability, strict security controls, and comprehensive monitoring
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Reference base configuration
+resources:
+  - ../../base
+
+# Production environment prefix
+namePrefix: prod-
+
+# Production-specific labels
+commonLabels:
+  environment: production
+  app.kubernetes.io/environment: production
+  app.kubernetes.io/managed-by: kustomize
+  app.kubernetes.io/part-of: ijap-platform
+  security.ijap.com/tier: production
+  monitoring.ijap.com/tier: critical
+  pci-compliance: enabled
+  ha.ijap.com/enabled: "true"
+  backup.ijap.com/enabled: "true"
+
+# Production-specific annotations
+commonAnnotations:
+  app.kubernetes.io/part-of: ijap-platform
+  environment.ijap.com/type: production
+  monitoring.ijap.com/enabled: "true"
+  security.ijap.com/audit-level: strict
+  backup.ijap.com/enabled: "true"
+  ha.ijap.com/enabled: "true"
+  encryption.ijap.com/tls-version: "1.3"
+  scaling.ijap.com/auto-enabled: "true"
+  security.ijap.com/pci-compliance: enabled
+  security.ijap.com/secret-rotation: enabled
+  backup.ijap.com/retention-policy: 7years
+
+# Production configuration patches
+patches:
+  # ConfigMap patches for production settings
+  - path: patch-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: ijap-config
+
+  # Deployment patches for high availability
+  - path: patch-deployment.yaml
+    target:
+      kind: Deployment
+      name: ijap-api
+
+  - path: patch-deployment.yaml
+    target:
+      kind: Deployment
+      name: ijap-web
+
+  # Security context patch for PCI compliance
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/securityContext
+        value:
+          runAsNonRoot: true
+          runAsUser: 1000
+          fsGroup: 2000
+          seccompProfile:
+            type: RuntimeDefault
+    target:
+      kind: Deployment
+      labelSelector: "app=ijap"
+
+# Production ConfigMap generator
+configMapGenerator:
+  - name: prod-config
+    behavior: merge
+    envs:
+      - production.env
+    options:
+      labels:
+        config-type: production
+        security-reviewed: "true"
+
+# Production secrets generator
+secretGenerator:
+  - name: prod-secrets
+    behavior: merge
+    envs:
+      - production-secrets.env
+    options:
+      labels:
+        secret-type: production
+        rotation-required: "true"
+
+# Generator options
+generatorOptions:
+  disableNameSuffixHash: false
+  labels:
+    generated-by: kustomize
+    environment: production
+    security-validated: "true"
+    pci-compliant: "true"
+
+# High availability replicas configuration
+replicas:
+  - name: ijap-api
+    count: 3
+  - name: ijap-web
+    count: 3
+
+# Resource transformers for production security
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: LabelTransformer
+    metadata:
+      name: security-labels
+    labels:
+      security.ijap.com/pci-scope: "true"
+      security.ijap.com/audit-enabled: "true"
+      security.ijap.com/environment: production
+    fieldSpecs:
+      - path: metadata/labels
+        create: true
+
+# Validation configuration
+validationConfig:
+  openAPIV3Schema:
+    properties:
+      metadata:
+        required:
+          - labels
+          - annotations
+      spec:
+        required:
+          - securityContext
+          - resources
