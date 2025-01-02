@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Slide in from right animation for screen transitions
+    Duration: 300ms
+    Interpolator: Accelerate-decelerate for natural movement
+    Used for:
+    - Fragment transitions
+    - Activity transitions 
+    - Navigation component animations
+    - Campaign detail view transitions
+    - Donation flow screen transitions
+    - Association detail transitions
+    Pairs with slide_out_left.xml for complete transition effect
+    Automatically mirrors for RTL layouts
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="300"
+        android:fromXDelta="100%p"
+        android:toXDelta="0"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+</set>
