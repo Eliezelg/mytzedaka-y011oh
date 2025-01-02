@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ijap.app.ui.donation.DonationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorBackground"
+        android:layoutDirection="locale"
+        android:importantForAccessibility="yes">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:importantForAccessibility="yes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:onRefreshListener="@{() -> viewModel.refreshDonations()}"
+            app:refreshing="@{viewModel.isRefreshing}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_donations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="@dimen/spacing_medium"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="outsideOverlay"
+                android:minHeight="@dimen/accessibility_touch_target_min"
+                android:contentDescription="@string/donation_list_description"
+                android:importantForAccessibility="yes"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:adapter="@{viewModel.donationAdapter}"
+                tools:listitem="@layout/item_donation"
+                tools:itemCount="5"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="?attr/colorOnSurface"
+            android:text="@string/no_donations_yet"
+            android:textAlignment="viewStart"
+            android:gravity="center"
+            android:visibility="@{viewModel.donations.empty ? android.view.View.VISIBLE : android.view.View.GONE}"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/no_donations_announcement"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/progress_initial_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isInitialLoading ? android.view.View.VISIBLE : android.view.View.GONE}"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/loading_donations_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
