@@ -1,0 +1,34 @@
+# Kubernetes version: v1.24+
+# Base namespace configuration for International Jewish Association Donation Platform
+# This configuration serves as the foundation for environment-specific overlays
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ijap
+  labels:
+    # Core application labels
+    app: ijap
+    managed-by: kustomize
+    
+    # Security monitoring labels
+    security.ijap.com/monitored: "true"
+    
+    # Environment identification
+    environment.ijap.com/base: "true"
+    
+    # Compliance and audit labels
+    compliance.ijap.com/audit-enabled: "true"
+    
+  annotations:
+    # Application metadata
+    app.kubernetes.io/part-of: ijap-platform
+    app.kubernetes.io/managed-by: kustomize
+    
+    # Security configurations
+    security.ijap.com/audit-level: strict
+    security.ijap.com/compliance-level: high
+    
+    # Operational configurations
+    monitoring.ijap.com/enabled: "true"
+    backup.ijap.com/enabled: "true"
