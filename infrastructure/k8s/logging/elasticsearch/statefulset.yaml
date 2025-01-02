@@ -1,0 +1,148 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+  namespace: logging
+  labels:
+    app: elasticsearch
+    service: logging
+    version: 7.9.3
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9200"
+spec:
+  serviceName: elasticsearch
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - elasticsearch
+            topologyKey: kubernetes.io/hostname
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      initContainers:
+      - name: fix-permissions
+        image: busybox:1.35.0
+        command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /usr/share/elasticsearch/data /usr/share/elasticsearch/logs
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/elasticsearch/data
+        - name: logs
+          mountPath: /usr/share/elasticsearch/logs
+      - name: increase-vm-max-map
+        image: busybox:1.35.0
+        command:
+        - sysctl
+        - -w
+        - vm.max_map_count=262144
+        securityContext:
+          privileged: true
+      containers:
+      - name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+        ports:
+        - containerPort: 9200
+          name: rest
+          protocol: TCP
+        - containerPort: 9300
+          name: inter-node
+          protocol: TCP
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/elasticsearch/data
+        - name: logs
+          mountPath: /usr/share/elasticsearch/logs
+        - name: elasticsearch-certs
+          mountPath: /usr/share/elasticsearch/config/certs
+          readOnly: true
+        env:
+        - name: cluster.name
+          value: ijap-logging-cluster
+        - name: node.name
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: discovery.seed_hosts
+          value: elasticsearch-0.elasticsearch,elasticsearch-1.elasticsearch,elasticsearch-2.elasticsearch
+        - name: cluster.initial_master_nodes
+          value: elasticsearch-0,elasticsearch-1,elasticsearch-2
+        - name: ES_JAVA_OPTS
+          value: "-Xms2g -Xmx2g"
+        - name: xpack.security.enabled
+          value: "true"
+        - name: xpack.security.transport.ssl.enabled
+          value: "true"
+        - name: xpack.security.transport.ssl.verification_mode
+          value: certificate
+        - name: xpack.security.transport.ssl.keystore.path
+          value: /usr/share/elasticsearch/config/certs/elasticsearch.keystore
+        - name: xpack.security.transport.ssl.truststore.path
+          value: /usr/share/elasticsearch/config/certs/elasticsearch.truststore
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: "1"
+            memory: 2Gi
+        readinessProbe:
+          httpGet:
+            path: /_cluster/health
+            port: 9200
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 9300
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - sh
+              - -c
+              - curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d '{"persistent": {"cluster.routing.allocation.exclude._name": "${HOSTNAME}"}}'
+      volumes:
+      - name: elasticsearch-certs
+        secret:
+          secretName: elasticsearch-certs
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Gi
+      storageClassName: standard
+  - metadata:
+      name: logs
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: standard
