@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="paymentMethod"
+            type="com.ijap.app.data.models.PaymentMethod" />
+            
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/payment_method_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="@dimen/touch_target_min"
+        android:layoutDirection="locale"
+        android:onClick="@{clickListener}"
+        android:stateListAnimator="@animator/payment_method_state_list_anim"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@{paymentMethod.isDefault ? @color/colorPrimary : @android:color/transparent}"
+        app:cardBackgroundColor="@{paymentMethod.isShabbatCompliant ? @color/colorShabbatCompliant : @color/colorSurface}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_normal"
+            android:layoutDirection="locale">
+
+            <ImageView
+                android:id="@+id/payment_method_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@string/payment_method_icon_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:paymentMethodIcon="@{paymentMethod.type}"
+                tools:src="@drawable/ic_credit_card"/>
+
+            <TextView
+                android:id="@+id/payment_method_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:text="@{paymentMethod.displayName}"
+                app:layout_constraintStart_toEndOf="@id/payment_method_icon"
+                app:layout_constraintEnd_toStartOf="@id/shabbat_compliant_indicator"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                tools:text="Credit Card - ****1234 (USD)"/>
+
+            <ImageView
+                android:id="@+id/shabbat_compliant_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@string/shabbat_compliant_indicator_description"
+                android:visibility="@{paymentMethod.isShabbatCompliant ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/colorPrimary"
+                android:src="@drawable/ic_shabbat_compliant"
+                tools:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/default_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@string/default_payment_method_indicator_description"
+                android:visibility="@{paymentMethod.isDefault ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toStartOf="@id/shabbat_compliant_indicator"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/colorPrimary"
+                android:src="@drawable/ic_default_method"
+                tools:visibility="visible"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
