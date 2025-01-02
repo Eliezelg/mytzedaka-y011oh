@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  namespace: logging
+  labels:
+    app: elasticsearch
+    service: logging
+    component: elasticsearch
+    tier: monitoring
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  # Headless service for StatefulSet DNS-based discovery
+  clusterIP: None
+  # Match pods created by the elasticsearch StatefulSet
+  selector:
+    app: elasticsearch
+  # Don't publish pods that are not ready to receive traffic
+  publishNotReadyAddresses: false
+  ports:
+    # REST API port for client access
+    - name: rest
+      port: 9200
+      targetPort: 9200
+      protocol: TCP
+    # Inter-node communication port for cluster formation
+    - name: inter-node
+      port: 9300
+      targetPort: 9300
+      protocol: TCP
+  # Use cluster-internal DNS
+  type: ClusterIP
+  # Enable session affinity for better connection handling
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800  # 3 hours
