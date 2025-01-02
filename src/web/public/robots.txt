@@ -1,0 +1,42 @@
+# Crawler configuration for secure and efficient indexing
+# Last updated: 2023
+
+# Global rules for all crawlers
+User-agent: *
+Allow: /
+Allow: /associations
+Allow: /campaigns
+Allow: /en/*
+Allow: /fr/*
+Allow: /he/*
+Allow: /sitemap.xml
+Disallow: /api/*
+Disallow: /auth/*
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /donations/*
+Disallow: /payment/*
+Disallow: /admin/*
+Crawl-delay: 10
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Allow: /associations
+Allow: /campaigns
+Allow: /en/*
+Allow: /fr/*
+Allow: /he/*
+Allow: /sitemap.xml
+Disallow: /api/*
+Disallow: /auth/*
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /donations/*
+Disallow: /payment/*
+Disallow: /admin/*
+
+# Reference to sitemap for efficient crawling
+Sitemap: https://domain.com/sitemap.xml
