@@ -1,0 +1,95 @@
+# Kubernetes storage configuration for International Jewish Association Donation Platform
+# Version: v1.24+
+# Dependencies: aws-ebs-csi-driver v1.12+
+
+---
+# Storage Class for GP3 EBS volumes with encryption and performance optimization
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc-gp3
+  labels:
+    app: ijap
+    component: storage
+    managed-by: kustomize
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  encrypted: "true"
+  fsType: ext4
+  iops: "3000"
+  throughput: "125"
+  kmsKeyId: ${KMS_KEY_ID}
+  multiAttach: "true"
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+mountOptions:
+  - noatime
+  - nodiratime
+
+---
+# Document Storage PVC for secure document management
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: document-storage
+  namespace: ijap
+  labels:
+    app: ijap
+    component: storage
+    type: document
+    managed-by: kustomize
+    compliance-tier: sensitive
+    backup-policy: daily
+    cost-center: storage-documents
+  annotations:
+    storage.kubernetes.io/retention-period: "7years"
+    backup.kubernetes.io/schedule: "daily"
+    encryption.kubernetes.io/algorithm: "AES-256-GCM"
+    monitoring.kubernetes.io/alert-threshold: "85"
+    replication.kubernetes.io/enabled: "true"
+    replication.kubernetes.io/target-region: "eu-west-1"
+    audit.kubernetes.io/enabled: "true"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ebs-sc-gp3
+  resources:
+    requests:
+      storage: 100Gi
+
+---
+# Backup Storage PVC for database and system backups
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backup-storage
+  namespace: ijap
+  labels:
+    app: ijap
+    component: storage
+    type: backup
+    managed-by: kustomize
+    compliance-tier: critical
+    backup-policy: continuous
+    cost-center: storage-backups
+  annotations:
+    storage.kubernetes.io/retention-period: "30d"
+    backup.kubernetes.io/schedule: "0 */5 * * *"
+    encryption.kubernetes.io/algorithm: "AES-256-GCM"
+    monitoring.kubernetes.io/alert-threshold: "85"
+    monitoring.kubernetes.io/metrics: "usage,iops,latency,throughput"
+    monitoring.kubernetes.io/iops-threshold: "2500"
+    monitoring.kubernetes.io/latency-threshold: "100ms"
+    replication.kubernetes.io/enabled: "true"
+    replication.kubernetes.io/target-region: "eu-west-1"
+    replication.kubernetes.io/sync-interval: "15m"
+    audit.kubernetes.io/enabled: "true"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ebs-sc-gp3
+  resources:
+    requests:
+      storage: 500Gi
