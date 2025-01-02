@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Application name (kept same as English for brand consistency) -->
+    <string name="app_name">IJAP</string>
+
+    <!-- Navigation labels with RTL support -->
+    <string name="navigation_home">דף הבית</string>
+    <string name="navigation_donations">תרומות</string>
+    <string name="navigation_campaigns">מבצעים</string>
+    <string name="navigation_profile">פרופיל</string>
+
+    <!-- Authentication strings with formal Hebrew usage -->
+    <string name="auth_login">התחברות</string>
+    <string name="auth_register">הרשמה</string>
+    <string name="auth_email_hint">כתובת דוא״ל</string>
+    <string name="auth_password_hint">סיסמה</string>
+    <string name="auth_two_factor_prompt">הזן קוד אימות</string>
+
+    <!-- Donation related strings with RTL support -->
+    <string name="donation_amount_hint">הזן סכום</string>
+    <string name="donation_currency_label">מטבע</string>
+    <string name="donation_payment_method">אמצעי תשלום</string>
+    <string name="donation_confirm_button">אישור תרומה</string>
+
+    <!-- Predefined donation amounts with Jewish significance -->
+    <string-array name="donation_amounts">
+        <item>18</item>
+        <item>36</item>
+        <item>100</item>
+        <item>180</item>
+        <item>360</item>
+        <item>1000</item>
+    </string-array>
+
+    <!-- Supported currencies with ILS prioritized -->
+    <string-array name="currencies">
+        <item>ILS</item>
+        <item>USD</item>
+        <item>EUR</item>
+    </string-array>
+
+    <!-- Plural strings following Hebrew grammar rules -->
+    <plurals name="donation_count">
+        <item quantity="one">תרומה אחת</item>
+        <item quantity="other">%d תרומות</item>
+    </plurals>
+</resources>
