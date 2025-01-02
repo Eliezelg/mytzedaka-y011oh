@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    app: fluentd
+    service: logging
+    version: v1.16
+    component: log-collector
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    metadata:
+      labels:
+        app: fluentd
+        version: v1.16
+        component: log-collector
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '24231'
+    spec:
+      serviceAccount: fluentd
+      # Allow scheduling on master nodes
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      
+      # Ensure Fluentd pods are distributed across nodes
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - fluentd
+              topologyKey: kubernetes.io/hostname
+
+      containers:
+      - name: fluentd
+        # Using official Fluentd image with Elasticsearch plugin v1.16
+        image: fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-1
+        env:
+        - name: FLUENT_ELASTICSEARCH_HOST
+          value: elasticsearch.logging.svc.cluster.local
+        - name: FLUENT_ELASTICSEARCH_PORT
+          value: '9200'
+        - name: FLUENT_ELASTICSEARCH_SCHEME
+          value: 'http'
+        - name: FLUENTD_SYSTEMD_CONF
+          value: 'disable'
+        
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+          requests:
+            cpu: 100m
+            memory: 200Mi
+
+        # Health monitoring
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 24231
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 24231
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        # Required privileges for log collection
+        securityContext:
+          runAsUser: 0
+          privileged: true
+
+        # Mount points for logs and configuration
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+        - name: config
+          mountPath: /fluentd/etc
+
+      # Volume definitions
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+      - name: config
+        configMap:
+          name: fluentd-config
