@@ -1,0 +1,104 @@
+{
+  "mockUsers": {
+    "admin": {
+      "id": "admin-123",
+      "email": "admin@ijap.org",
+      "firstName": "Admin",
+      "lastName": "User",
+      "phoneNumber": "+1234567890",
+      "role": "ADMIN",
+      "preferredLanguage": "en",
+      "isVerified": true,
+      "twoFactorEnabled": true,
+      "lastLoginAt": "2023-10-25T10:00:00Z",
+      "createdAt": "2023-01-01T00:00:00Z",
+      "lastPasswordChange": "2023-09-01T00:00:00Z",
+      "failedLoginAttempts": 0,
+      "recoveryEmail": "admin.backup@ijap.org",
+      "testPassword": "Admin123!@#"
+    },
+    "association": {
+      "id": "assoc-123",
+      "email": "association@charity.org",
+      "firstName": "Association",
+      "lastName": "Manager",
+      "phoneNumber": "+9876543210",
+      "role": "ASSOCIATION",
+      "preferredLanguage": "he",
+      "isVerified": true,
+      "twoFactorEnabled": false,
+      "lastLoginAt": "2023-10-24T15:30:00Z",
+      "createdAt": "2023-02-01T00:00:00Z",
+      "lastPasswordChange": "2023-09-15T00:00:00Z",
+      "failedLoginAttempts": 0,
+      "recoveryEmail": null,
+      "testPassword": "Assoc123!@#"
+    },
+    "donor": {
+      "id": "donor-123",
+      "email": "donor@example.com",
+      "firstName": "Regular",
+      "lastName": "Donor",
+      "phoneNumber": "+1122334455",
+      "role": "DONOR",
+      "preferredLanguage": "fr",
+      "isVerified": true,
+      "twoFactorEnabled": false,
+      "lastLoginAt": "2023-10-23T09:15:00Z",
+      "createdAt": "2023-03-01T00:00:00Z",
+      "lastPasswordChange": "2023-08-01T00:00:00Z",
+      "failedLoginAttempts": 0,
+      "recoveryEmail": "donor.backup@example.com",
+      "testPassword": "Donor123!@#"
+    },
+    "unverified": {
+      "id": "unverified-123",
+      "email": "unverified@example.com",
+      "firstName": "Unverified",
+      "lastName": "User",
+      "phoneNumber": null,
+      "role": "DONOR",
+      "preferredLanguage": "en",
+      "isVerified": false,
+      "twoFactorEnabled": false,
+      "lastLoginAt": null,
+      "createdAt": "2023-10-20T00:00:00Z",
+      "lastPasswordChange": "2023-10-20T00:00:00Z",
+      "failedLoginAttempts": 0,
+      "recoveryEmail": null,
+      "testPassword": "Unverified123!@#"
+    }
+  },
+  "mockAuthTokens": {
+    "accessToken": "mock.jwt.access.token.for.testing.only",
+    "refreshToken": "mock.jwt.refresh.token.for.testing.only",
+    "expiresIn": 900,
+    "tokenType": "Bearer"
+  },
+  "mockUserSettings": {
+    "admin": {
+      "twoFactorEnabled": true,
+      "preferredLanguage": "en",
+      "emailNotifications": true,
+      "autoLogoutTime": 30
+    },
+    "association": {
+      "twoFactorEnabled": false,
+      "preferredLanguage": "he",
+      "emailNotifications": true,
+      "autoLogoutTime": 60
+    },
+    "donor": {
+      "twoFactorEnabled": false,
+      "preferredLanguage": "fr",
+      "emailNotifications": true,
+      "autoLogoutTime": 120
+    },
+    "unverified": {
+      "twoFactorEnabled": false,
+      "preferredLanguage": "en",
+      "emailNotifications": true,
+      "autoLogoutTime": 60
+    }
+  }
+}
