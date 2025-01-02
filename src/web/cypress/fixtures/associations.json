@@ -1,0 +1,95 @@
+{
+  "associations": [
+    {
+      "id": "assoc-001",
+      "name": "Global Jewish Aid",
+      "email": "contact@globaljewishaid.org",
+      "phone": "+1-555-0123",
+      "description": "International Jewish charitable organization focused on global humanitarian aid",
+      "website": "https://www.globaljewishaid.org",
+      "address": {
+        "street": "123 Charity Lane",
+        "city": "New York",
+        "state": "NY",
+        "country": "USA",
+        "postalCode": "10001"
+      },
+      "legalInfo": {
+        "registrationNumber": "12345-NY",
+        "taxId": "US-TAX-12345",
+        "registrationDate": "2020-01-01T00:00:00.000Z",
+        "registrationCountry": "USA"
+      },
+      "categories": [
+        "humanitarian",
+        "education",
+        "healthcare"
+      ],
+      "primaryLanguage": "en",
+      "supportedLanguages": [
+        "en",
+        "fr",
+        "he"
+      ],
+      "paymentGateways": {
+        "stripe": {
+          "accountId": "acct_stripe123",
+          "enabled": true
+        },
+        "tranzilla": {
+          "terminalId": "",
+          "enabled": false
+        }
+      },
+      "isVerified": true,
+      "status": "ACTIVE",
+      "createdAt": "2020-01-01T00:00:00.000Z",
+      "updatedAt": "2023-10-25T00:00:00.000Z"
+    },
+    {
+      "id": "assoc-002",
+      "name": "ישראל צדקה",
+      "email": "contact@israelcharity.org.il",
+      "phone": "+972-3-555-0123",
+      "description": "Israeli charitable organization supporting local communities",
+      "website": "https://www.israelcharity.org.il",
+      "address": {
+        "street": "45 Rothschild Boulevard",
+        "city": "Tel Aviv",
+        "state": "",
+        "country": "Israel",
+        "postalCode": "6688313"
+      },
+      "legalInfo": {
+        "registrationNumber": "580123456",
+        "taxId": "IL-TAX-67890",
+        "registrationDate": "2019-01-01T00:00:00.000Z",
+        "registrationCountry": "Israel"
+      },
+      "categories": [
+        "community",
+        "education",
+        "religious"
+      ],
+      "primaryLanguage": "he",
+      "supportedLanguages": [
+        "he",
+        "en"
+      ],
+      "paymentGateways": {
+        "stripe": {
+          "accountId": "acct_stripe456",
+          "enabled": true
+        },
+        "tranzilla": {
+          "terminalId": "tranz789",
+          "enabled": true
+        }
+      },
+      "isVerified": true,
+      "status": "ACTIVE",
+      "createdAt": "2019-01-01T00:00:00.000Z",
+      "updatedAt": "2023-10-25T00:00:00.000Z"
+    }
+  ]
+}
