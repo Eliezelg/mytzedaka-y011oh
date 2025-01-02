@@ -1,0 +1,105 @@
+# Datadog Agent Configuration v7.45.0
+# International Jewish Association Donation Platform Monitoring Configuration
+
+# Core agent configuration
+api_key: ${DD_API_KEY}
+site: datadoghq.com
+hostname_file: /etc/hostname
+logs_enabled: true
+
+# APM and tracing configuration
+apm_config:
+  enabled: true
+  env: ${DD_ENV}
+  apm_non_local_traffic: true
+  transaction_sample_rate: 1.0
+  max_traces_per_second: 1000
+  trace_processing_rules:
+    - type: tag
+      name: service_name
+      tag: service
+      sources: ["service"]
+
+# Logs configuration with enhanced security
+logs_config:
+  container_collect_all: true
+  processing_rules:
+    - type: mask_sequences
+      name: mask_api_keys
+      pattern: 'api_key=[^&]*'
+    - type: mask_sequences
+      name: mask_pii
+      pattern: '(email|phone|address)=\w+'
+    - type: mask_sequences
+      name: mask_financial
+      pattern: '(card_number|cvv|expiry)=\w+'
+
+# Process and container monitoring
+process_config:
+  enabled: true
+  process_collection_enabled: true
+  container_collection_enabled: true
+  intervals:
+    container: 10
+    process: 10
+    connections: 10
+
+# Metrics configuration
+metrics_config:
+  kubernetes_http_kubelet_port: 10250
+  kubernetes_https_kubelet_port: 10250
+  collect_kubernetes_events: true
+  custom_metrics:
+    - name: concurrent_users
+      type: gauge
+      interval: 10
+    - name: transaction_duration
+      type: histogram
+      interval: 5
+
+# Auto-discovery configuration
+autodiscovery_config:
+  enabled: true
+  listeners:
+    - name: docker
+      config:
+        poll_interval: "5s"
+    - name: kubernetes
+      config:
+        poll_interval: "15s"
+
+# Service integrations
+integrations:
+  # MongoDB monitoring
+  - name: mongodb
+    init_config: {}
+    instances:
+      - hosts: ["mongodb://mongodb:27017"]
+        additional_metrics:
+          - metrics.commands
+          - metrics.opcounters
+          - metrics.connections
+          - metrics.document
+          - metrics.getmore
+          - metrics.repl
+          - metrics.stats
+
+  # Redis monitoring
+  - name: redis
+    init_config: {}
+    instances:
+      - host: redis
+        port: 6379
+        keys: ["*"]
+        command_stats: true
+        slowlog: true
+
+  # RabbitMQ monitoring
+  - name: rabbitmq
+    init_config: {}
+    instances:
+      - url: "http://rabbitmq:15672"
+        username: ${RABBITMQ_USER}
+        password: ${RABBITMQ_PASS}
+        collect_exchange_metrics: true
+        collect_channel_metrics: true
