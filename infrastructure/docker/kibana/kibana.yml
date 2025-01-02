@@ -1,0 +1,68 @@
+# Kibana configuration for IJAP Logging Platform
+# Version: 7.17.0
+# Purpose: Production configuration with enhanced security, monitoring and logging capabilities
+
+#----------------------
+# Server Configuration
+#----------------------
+server.name: ijap-kibana
+server.host: "0.0.0.0"
+server.port: 5601
+server.publicBaseUrl: ${KIBANA_PUBLIC_URL}
+
+#----------------------
+# Elasticsearch Connection
+#----------------------
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: ${ELASTICSEARCH_USERNAME}
+elasticsearch.password: ${ELASTICSEARCH_PASSWORD}
+elasticsearch.requestTimeout: 30000
+elasticsearch.shardTimeout: 30000
+
+#----------------------
+# Monitoring Configuration
+#----------------------
+# Container monitoring
+monitoring.ui.container.elasticsearch.enabled: true
+monitoring.ui.container.logstash.enabled: true
+
+# X-Pack monitoring
+xpack.monitoring.enabled: true
+xpack.monitoring.collection.enabled: true
+xpack.monitoring.collection.interval: "10s"
+
+#----------------------
+# Security Configuration
+#----------------------
+# Enable security features
+xpack.security.enabled: true
+
+# Encryption keys for various features
+xpack.encryptedSavedObjects.encryptionKey: ${ENCRYPTION_KEY}
+xpack.reporting.encryptionKey: ${REPORTING_KEY}
+xpack.security.encryptionKey: ${SECURITY_KEY}
+
+# Security audit and session management
+xpack.security.audit.enabled: true
+xpack.security.session.idleTimeout: "1h"
+xpack.security.session.lifespan: "24h"
+
+#----------------------
+# Logging Configuration
+#----------------------
+# Log destination and format
+logging.dest: /var/log/kibana/kibana.log
+logging.json: true
+
+# Log rotation settings
+logging.rotate:
+  enabled: true
+  size: "100mb"
+  keepFiles: 5
+  compressOnRotation: true
+
+# Event logging configuration
+logging.events:
+  ops: ["error", "warning"]
+  request: ["error", "warning"]
+  response: ["error", "warning"]
