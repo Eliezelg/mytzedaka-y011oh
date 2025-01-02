@@ -1,0 +1,89 @@
+# Build outputs
+/build/
+/release/
+/debug/
+
+# IDE files
+*.iml
+.gradle/
+local.properties
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Android Studio captures and analysis
+/captures/
+.externalNativeBuild/
+.cxx/
+/lint/
+
+# Build artifacts
+*.apk
+*.aab
+*.aar
+*.so
+
+# Signing configs and keystores
+*.keystore
+*.jks
+*.pepk
+keystore.properties
+
+# Sensitive configuration
+google-services.json
+.env*
+firebase-*.json
+*.p12
+*.pem
+
+# Crash reporting and analytics
+/crashlytics/
+crashlytics.properties
+crashlytics-build.properties
+com_crashlytics_export_strings.xml
+
+# Logs and diagnostics
+*.log
+*.hprof
+lint-report.*
+lint-results.*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+
+# Generated files
+generated/
+bin/
+gen/
+out/
+
+# ProGuard
+proguard/
+
+# Navigation
+navigation/safeargs/
+
+# Room schema
+schema/
+
+# Test coverage
+jacoco.exec
+coverage/
+
+# Version control
+.svn/
+.hg/
+
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Android Profiling
+*.trace
