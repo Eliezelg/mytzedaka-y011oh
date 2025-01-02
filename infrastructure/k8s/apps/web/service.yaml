@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ijap-web-service
+  labels:
+    app: ijap
+    component: web
+    managed-by: kustomize
+  annotations:
+    # Prometheus monitoring configuration
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    prometheus.io/path: "/metrics"
+    # Service metadata
+    service.kubernetes.io/description: "Web frontend service for International Jewish Association Donation Platform"
+    maintainer: "platform-team@ijap.org"
+    # Security annotations
+    security.policy/pci-dss: "enforced"
+    security.policy/gdpr: "enforced"
+
+spec:
+  # Using ClusterIP for internal service discovery and load balancing
+  type: ClusterIP
+  
+  # Port configuration matching the deployment container ports
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+  
+  # Selector matching deployment pod labels
+  selector:
+    app: ijap
+    component: web
+  
+  # Session affinity configuration
+  sessionAffinity: None
+  
+  # Internal traffic policy for improved security
+  internalTrafficPolicy: Cluster
+  
+  # Publishing not required as service is internal
+  publishNotReadyAddresses: false
+  
+  # IP configuration
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv4
