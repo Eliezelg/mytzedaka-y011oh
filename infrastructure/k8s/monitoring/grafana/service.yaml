@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-service
+  namespace: monitoring
+  labels:
+    app: grafana
+    component: monitoring
+    part-of: ijap-platform
+    tier: observability
+  annotations:
+    monitoring.ijap.com/service-type: "internal"
+    monitoring.ijap.com/component: "visualization"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: grafana
+  sessionAffinity: None
+  publishNotReadyAddresses: false
+  internalTrafficPolicy: Cluster
