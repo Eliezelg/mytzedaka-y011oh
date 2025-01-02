@@ -1,0 +1,63 @@
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+*.xcworkspace/*
+!*.xcworkspace/xcshareddata/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# OS Generated Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Security and Configuration Files
+*.cer
+*.mobileprovision
+*.p12
+*.key
+GoogleService-Info.plist
+*/Configuration.plist
+*/Secrets.plist
+
+# Swift Package Manager
+Packages/
+.build/
+Package.pins
+Package.resolved
+
+# IDE
+.idea/
+*.swp
+*.swo
+*.swn
