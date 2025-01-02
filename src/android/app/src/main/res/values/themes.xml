@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Theme definitions for IJAP Android app
+    Using Material Design Components v1.9.0
+    Implements WCAG 2.1 Level AA compliance
+    Supports RTL layouts for Hebrew content
+-->
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.IJAP" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand colors -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background and surface colors -->
+        <item name="android:windowBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/surface_light</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Typography styles -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1</item>
+
+        <!-- Component styles -->
+        <item name="buttonStyle">@style/Widget.App.Button.Primary</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.App.Button.Secondary</item>
+        <item name="textInputStyle">@style/Widget.App.TextField</item>
+
+        <!-- RTL support -->
+        <item name="android:layoutDirection">locale</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">viewStart</item>
+
+        <!-- Accessibility - Touch targets -->
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">48dp</item>
+
+        <!-- Typography -->
+        <item name="android:fontFamily">@font/app_font_family</item>
+
+        <!-- Disable force dark mode -->
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+</resources>
