@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material Design Components version: 1.9.0 -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base dark theme for IJAP application -->
+    <style name="Theme.IJAP" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary</item>
+        
+        <!-- Surface and background colors optimized for OLED displays -->
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+        
+        <!-- System bars styling -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/surface_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Text colors with WCAG 2.1 AA compliant contrast -->
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+        
+        <!-- Interactive elements -->
+        <item name="colorControlHighlight">@color/ripple_dark</item>
+        
+        <!-- Typography styles -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.App.Body2</item>
+        
+        <!-- Widget styles -->
+        <item name="buttonStyle">@style/Widget.App.Button.Primary</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.App.Button.Secondary</item>
+        <item name="textInputStyle">@style/Widget.App.TextField</item>
+        <item name="materialCardViewStyle">@style/Widget.App.Card</item>
+        
+        <!-- RTL support -->
+        <item name="android:layoutDirection">locale</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:textAlignment">viewStart</item>
+        
+        <!-- System behavior -->
+        <item name="android:forceDarkAllowed">true</item>
+        
+        <!-- Animations and transitions -->
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        
+        <!-- Typography -->
+        <item name="android:fontFamily">@font/app_font_family</item>
+    </style>
+
+</resources>
