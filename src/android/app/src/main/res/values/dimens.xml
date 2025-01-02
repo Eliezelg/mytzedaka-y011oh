@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Activity Margins -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+
+    <!-- Input Elements -->
+    <dimen name="input_field_height">56dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+
+    <!-- Card Elements -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+
+    <!-- Touch Targets -->
+    <dimen name="min_touch_target">48dp</dimen>
+    <dimen name="icon_touch_padding">12dp</dimen>
+
+    <!-- Campaign Card Specific -->
+    <dimen name="campaign_card_height">180dp</dimen>
+    <dimen name="campaign_image_height">120dp</dimen>
+    <dimen name="progress_bar_height">4dp</dimen>
+
+    <!-- Navigation Elements -->
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- List Items -->
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+    <dimen name="list_icon_size">40dp</dimen>
+
+    <!-- Donation Form -->
+    <dimen name="donation_amount_button_width">80dp</dimen>
+    <dimen name="donation_amount_button_height">40dp</dimen>
+    <dimen name="donation_form_padding">24dp</dimen>
+
+    <!-- Responsive Breakpoints -->
+    <dimen name="screen_edge_margin_small">16dp</dimen>
+    <dimen name="screen_edge_margin_medium">24dp</dimen>
+    <dimen name="screen_edge_margin_large">32dp</dimen>
+
+    <!-- Dialog Dimensions -->
+    <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="dialog_corner_radius">16dp</dimen>
+    <dimen name="dialog_elevation">24dp</dimen>
+
+    <!-- Dividers -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_margin">8dp</dimen>
+
+    <!-- Avatar and Profile Images -->
+    <dimen name="avatar_size_small">32dp</dimen>
+    <dimen name="avatar_size_medium">48dp</dimen>
+    <dimen name="avatar_size_large">64dp</dimen>
+
+    <!-- RTL Support -->
+    <dimen name="rtl_content_padding_start">16dp</dimen>
+    <dimen name="rtl_content_padding_end">16dp</dimen>
+
+    <!-- Accessibility -->
+    <dimen name="accessibility_touch_target_min">48dp</dimen>
+    <dimen name="accessibility_spacing">8dp</dimen>
+</resources>
