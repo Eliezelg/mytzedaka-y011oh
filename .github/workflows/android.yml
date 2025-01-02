@@ -1,0 +1,169 @@
+name: Android CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths: [ 'src/android/**' ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main, develop ]
+    paths: [ 'src/android/**' ]
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+  id-token: write
+
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+  GRADLE_VERSION: '8.1.2'
+  ANDROID_SDK: '33'
+  BUILD_TOOLS: '33.0.2'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Code quality checks
+        run: |
+          cd src/android
+          ./gradlew ktlintCheck detekt
+
+      - name: Security scan
+        run: |
+          cd src/android
+          ./gradlew dependencyCheckAnalyze
+        
+      - name: Upload security scan results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'src/android/build/reports/dependency-check-report.sarif'
+
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-version: ${{ env.ANDROID_SDK }}
+          build-tools-version: ${{ env.BUILD_TOOLS }}
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Decode Keystore
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > src/android/app/release.keystore
+
+      - name: Unit tests with coverage
+        run: |
+          cd src/android
+          ./gradlew testDebugUnitTest jacocoTestReport
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: src/android/app/build/reports/tests/
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: src/android/app/build/reports/jacoco/
+
+      - name: SonarQube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          cd src/android
+          ./gradlew sonarqube
+
+      - name: Build debug APK
+        run: |
+          cd src/android
+          ./gradlew assembleDebug
+
+      - name: Build and sign release
+        if: github.ref == 'refs/heads/main'
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          cd src/android
+          ./gradlew assembleRelease bundleRelease
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-apk
+          path: src/android/app/build/outputs/apk/debug/*.apk
+
+      - name: Upload release artifacts
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-artifacts
+          path: |
+            src/android/app/build/outputs/apk/release/*.apk
+            src/android/app/build/outputs/bundle/release/*.aab
+
+      - name: Clean up secrets
+        if: always()
+        run: |
+          rm -f src/android/app/release.keystore
