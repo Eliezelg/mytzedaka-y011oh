@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: monitoring
+  labels:
+    app: grafana
+    component: monitoring
+    part-of: ijap-platform
+    version: v1
+data:
+  grafana.ini: |
+    # Grafana v9.5.0 Configuration
+    
+    [server]
+    protocol = http
+    http_port = 3000
+    domain = grafana.ijap.local
+    root_url = %(protocol)s://%(domain)s
+    serve_from_sub_path = false
+    
+    [security]
+    # Admin credentials managed via environment variables
+    admin_user = ${GF_SECURITY_ADMIN_USER}
+    admin_password = ${GF_SECURITY_ADMIN_PASSWORD}
+    secret_key = ${GF_SECURITY_SECRET_KEY}
+    disable_gravatar = true
+    cookie_secure = true
+    cookie_samesite = strict
+    allow_embedding = false
+    
+    [auth]
+    disable_login_form = false
+    disable_signout_menu = false
+    login_maximum_inactive_lifetime_duration = 7d
+    login_maximum_lifetime_duration = 30d
+    
+    [users]
+    allow_sign_up = false
+    auto_assign_org = true
+    auto_assign_org_role = Viewer
+    verify_email_enabled = true
+    
+    [auth.basic]
+    enabled = true
+    
+    [auth.proxy]
+    enabled = false
+    
+    [analytics]
+    reporting_enabled = false
+    check_for_updates = false
+    
+    [dashboards]
+    versions_to_keep = 20
+    min_refresh_interval = 15s
+    
+    [unified_alerting]
+    enabled = true
+    
+    [alerting]
+    enabled = false
+    
+    [metrics]
+    enabled = true
+    basic_auth_username = ${GF_METRICS_BASIC_AUTH_USERNAME}
+    basic_auth_password = ${GF_METRICS_BASIC_AUTH_PASSWORD}
+    
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus:9090
+        isDefault: true
+        version: 1
+        editable: false
+        jsonData:
+          timeInterval: "15s"
+          queryTimeout: "30s"
+          httpMethod: "POST"
+          manageAlerts: true
+          prometheusType: "Prometheus"
+          prometheusVersion: "2.45.0"
+        secureJsonData:
+          httpHeaderValue1: "${GF_DATASOURCE_PROMETHEUS_API_KEY}"
+        
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+      - name: 'IJAP Dashboards'
+        orgId: 1
+        folder: 'IJAP'
+        folderUid: 'ijap-monitoring'
+        type: file
+        disableDeletion: true
+        editable: false
+        updateIntervalSeconds: 60
+        allowUiUpdates: false
+        options:
+          path: /var/lib/grafana/dashboards
+          foldersFromFilesStructure: true
