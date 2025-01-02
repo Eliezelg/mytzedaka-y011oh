@@ -1,0 +1,96 @@
+PODS:
+  - Alamofire (5.8.0)
+  - Firebase/Analytics (10.0.0):
+    - Firebase/Core
+  - Firebase/Core (10.0.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 10.0.0)
+  - Firebase/CoreOnly (10.0.0)
+  - Firebase/Crashlytics (10.0.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 10.0.0)
+  - Firebase/Messaging (10.0.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.0.0)
+  - FirebaseAnalytics (10.0.0):
+    - FirebaseCore (~> 10.0.0)
+    - FirebaseInstallations (~> 10.0.0)
+    - GoogleAppMeasurement (= 10.0.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.8.0)
+    - GoogleUtilities/Network (~> 7.8.0)
+    - GoogleUtilities/NSData+zlib (~> 7.8.0)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCore (10.0.0)
+  - FirebaseCrashlytics (10.0.0)
+  - FirebaseInstallations (10.0.0)
+  - FirebaseMessaging (10.0.0)
+  - GoogleAppMeasurement (10.0.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.8.0)
+  - GoogleUtilities/MethodSwizzler (7.8.0)
+  - GoogleUtilities/Network (7.8.0)
+  - GoogleUtilities/NSData+zlib (7.8.0)
+  - IQKeyboardManagerSwift (6.5.12)
+  - KeychainAccess (4.2.2)
+  - MaterialComponents (124.2.0)
+  - nanopb (2.30909.0)
+  - RxCocoa (6.6.0):
+    - RxRelay (= 6.6.0)
+    - RxSwift (= 6.6.0)
+  - RxRelay (6.6.0):
+    - RxSwift (= 6.6.0)
+  - RxSwift (6.6.0)
+  - SDWebImage (5.18.3):
+    - SDWebImage/Core (= 5.18.3)
+  - SDWebImage/Core (5.18.3)
+  - Stripe (23.18.2):
+    - StripeCore (= 23.18.2)
+    - StripePayments (= 23.18.2)
+    - StripePaymentsUI (= 23.18.2)
+  - StripeCore (23.18.2)
+  - StripePayments (23.18.2):
+    - StripeCore (= 23.18.2)
+  - StripePaymentsUI (23.18.2):
+    - StripeCore (= 23.18.2)
+    - StripePayments (= 23.18.2)
+  - SwiftLint (0.52.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.8.0)
+  - Firebase/Analytics (~> 10.0)
+  - Firebase/Crashlytics (~> 10.0)
+  - Firebase/Messaging (~> 10.0)
+  - IQKeyboardManagerSwift (~> 6.5.0)
+  - KeychainAccess (~> 4.2.0)
+  - MaterialComponents (~> 124.2.0)
+  - RxCocoa (~> 6.6.0)
+  - RxSwift (~> 6.6.0)
+  - SDWebImage (~> 5.18.0)
+  - Stripe (~> 23.0)
+  - SwiftLint (~> 0.52.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+  Firebase: 2e9c8f2b41a8f516cbfea3d5d6e4c68ab3c4bd9c
+  FirebaseAnalytics: 7c9b3c7af3690d47bfa7ef2c5d3cd5fe26738b1b
+  FirebaseCore: 28e84c0c65485b58c5ad3e519d7f5c8c4b01f821
+  FirebaseCrashlytics: 8c74e6a89f8401c0c826b2d6e8e02e46b866a3c
+  FirebaseInstallations: 7f1c9ae6bd9df6abe9c74124b38fa8740aba5df4
+  FirebaseMessaging: 8916bf5edb1dbfac74665a181e4d1ab3a78a08a2
+  GoogleAppMeasurement: 7e48a3249792ac35d6f11b2d378c4e5c7a3ec659
+  GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
+  IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
+  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
+  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
+  SDWebImage: 96e0c18ef14010b7485210e92fac888587ebb958
+  Stripe: 59f6659e8ea413def19c97c57e23f5ec6ea48cf8
+  StripeCore: 193f27552fb98108ebfe0df11651fe5f38948305
+  StripePayments: 71bf62ccdacefc4b68b46a02a7f2492aeba252b3
+  StripePaymentsUI: fd08081c4be73c16322dc76a1878140520a9df2e
+  SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
+
+COCOAPODS: 1.13.0
