@@ -1,0 +1,113 @@
+/* App Name */
+"app_name" = "Plateforme Internationale des Associations Juives";
+
+/* Common UI Elements */
+"common.ok" = "OK";
+"common.cancel" = "Annuler";
+"common.done" = "Terminé";
+"common.back" = "Retour";
+"common.next" = "Suivant";
+"common.save" = "Enregistrer";
+"common.delete" = "Supprimer";
+"common.error" = "Erreur";
+"common.success" = "Succès";
+"common.loading" = "Chargement...";
+
+/* Accessibility - VoiceOver Hints */
+"accessibility.donate.hint" = "Double-tapez pour faire un don";
+"accessibility.amount.hint" = "Double-tapez pour saisir le montant";
+"accessibility.currency.hint" = "Double-tapez pour sélectionner la devise";
+
+/* RTL Support Markers */
+"rtl.marker.start" = "\u200e";
+"rtl.marker.end" = "\u200f";
+
+/* Currency Formatting */
+"format.currency.eur" = "%@ €";
+"format.currency.usd" = "%@ $";
+"format.currency.ils" = "%@ ₪";
+
+/* Number Formatting */
+"format.number.thousands" = " ";
+"format.number.decimal" = ",";
+
+/* Date Formatting */
+"format.date.long" = "d MMMM yyyy";
+"format.date.short" = "dd/MM/yy";
+
+/* Navigation */
+"nav.home" = "Accueil";
+"nav.donations" = "Dons";
+"nav.campaigns" = "Campagnes";
+"nav.profile" = "Profil";
+"nav.settings" = "Paramètres";
+
+/* Donation Flow */
+"donation.title" = "Faire un don";
+"donation.amount" = "Montant";
+"donation.currency" = "Devise";
+"donation.payment_method" = "Moyen de paiement";
+"donation.recurring" = "Don mensuel";
+"donation.anonymous" = "Don anonyme";
+"donation.confirm" = "Confirmer le don";
+"donation.success" = "Don effectué avec succès";
+"donation.receipt" = "Reçu fiscal";
+
+/* Campaign Related */
+"campaign.active" = "Campagnes actives";
+"campaign.ended" = "Campagnes terminées";
+"campaign.goal" = "Objectif : %@";
+"campaign.raised" = "Collecté : %@";
+"campaign.remaining" = "Reste %@ jours";
+"campaign.share" = "Partager";
+
+/* Association Related */
+"association.verified" = "Association vérifiée";
+"association.documents" = "Documents";
+"association.contact" = "Contacter";
+"association.about" = "À propos";
+"association.donations" = "Historique des dons";
+
+/* Profile */
+"profile.personal_info" = "Informations personnelles";
+"profile.payment_methods" = "Moyens de paiement";
+"profile.donation_history" = "Historique des dons";
+"profile.tax_receipts" = "Reçus fiscaux";
+"profile.preferences" = "Préférences";
+
+/* Settings */
+"settings.language" = "Langue";
+"settings.notifications" = "Notifications";
+"settings.privacy" = "Confidentialité";
+"settings.help" = "Aide";
+"settings.about" = "À propos";
+
+/* Error Messages */
+"error.network" = "Erreur de connexion";
+"error.payment" = "Erreur de paiement";
+"error.validation" = "Veuillez vérifier les informations saisies";
+"error.required" = "Ce champ est obligatoire";
+"error.minimum_amount" = "Le montant minimum est de %@";
+
+/* Success Messages */
+"success.payment" = "Paiement effectué avec succès";
+"success.registration" = "Inscription réussie";
+"success.profile_update" = "Profil mis à jour";
+
+/* Religious Terms */
+"religious.tzedakah" = "Tsédaka";
+"religious.mitzvah" = "Mitsva";
+"religious.torah" = "Torah";
+"religious.shabbat" = "Chabbat";
+
+/* Financial Terms */
+"financial.tax_deductible" = "Déductible des impôts";
+"financial.tax_receipt" = "Reçu CERFA";
+"financial.processing_fee" = "Frais de traitement";
+"financial.secure_payment" = "Paiement sécurisé";
+
+/* Accessibility - Pronunciation Guides */
+"pronunciation.tzedakah" = "tsé-da-ka";
+"pronunciation.mitzvah" = "mits-va";
+"pronunciation.torah" = "to-ra";
+"pronunciation.shabbat" = "cha-bat";
