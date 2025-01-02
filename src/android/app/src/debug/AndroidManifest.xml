@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Debug-specific Android manifest that merges with the main manifest during debug builds.
+    Provides additional permissions and configurations for development and testing.
+    
+    External dependencies:
+    - android-sdk: v31
+    - android-sdk-tools: latest
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Debug-specific permissions for development and testing -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:debuggable="true"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:networkSecurityConfig="@xml/network_security_config_debug"
+        tools:replace="android:usesCleartextTraffic"
+        tools:targetApi="31"
+        tools:ignore="HardcodedDebugMode">
+        
+        <!-- Debug-specific application configurations are merged with main manifest -->
+        
+    </application>
+
+</manifest>
