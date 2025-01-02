@@ -1,0 +1,161 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: monitoring
+    part-of: ijap-platform
+    version: v1
+data:
+  prometheus.yml: |
+    global:
+      # Global scrape interval and evaluation settings
+      scrape_interval: 15s
+      evaluation_interval: 15s
+      scrape_timeout: 10s
+      external_labels:
+        environment: production
+        region: global
+
+    # Scrape configurations for various targets
+    scrape_configs:
+      # Kubernetes API Server monitoring
+      - job_name: kubernetes-apiservers
+        kubernetes_sd_configs:
+          - role: endpoints
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: default;kubernetes;https
+
+      # Kubernetes Node monitoring
+      - job_name: kubernetes-nodes
+        kubernetes_sd_configs:
+          - role: node
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics
+
+      # Pod monitoring with annotation-based discovery
+      - job_name: kubernetes-pods
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+          - action: labelmap
+            regex: __meta_kubernetes_pod_label_(.+)
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: kubernetes_namespace
+          - source_labels: [__meta_kubernetes_pod_name]
+            action: replace
+            target_label: kubernetes_pod_name
+
+      # IJAP Backend Service monitoring
+      - job_name: ijap-backend
+        metrics_path: /metrics
+        scrape_interval: 10s
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names: [default]
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_app]
+            action: keep
+            regex: ijap-backend
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            target_label: __metrics_port__
+          - action: labelmap
+            regex: __meta_kubernetes_service_label_(.+)
+
+      # IJAP Frontend Service monitoring
+      - job_name: ijap-frontend
+        metrics_path: /metrics
+        scrape_interval: 10s
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names: [default]
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_app]
+            action: keep
+            regex: ijap-frontend
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            target_label: __metrics_port__
+          - action: labelmap
+            regex: __meta_kubernetes_service_label_(.+)
+
+      # Service monitoring for donation processing
+      - job_name: donation-processing
+        metrics_path: /metrics
+        scrape_interval: 5s
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names: [default]
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_component]
+            action: keep
+            regex: donation-processor
+          - action: labelmap
+            regex: __meta_kubernetes_service_label_(.+)
+
+      # Payment gateway monitoring
+      - job_name: payment-gateways
+        metrics_path: /metrics
+        scrape_interval: 10s
+        kubernetes_sd_configs:
+          - role: service
+            namespaces:
+              names: [default]
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_component]
+            action: keep
+            regex: (stripe|tranzilla)-gateway
+          - action: labelmap
+            regex: __meta_kubernetes_service_label_(.+)
+
+    # Alerting configuration
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+                - alertmanager:9093
+
+    # Rules configuration
+    rule_files:
+      - /etc/prometheus/rules/*.rules
+
+    # Storage configuration
+    storage:
+      tsdb:
+        retention:
+          time: 15d
+          size: 50GB
