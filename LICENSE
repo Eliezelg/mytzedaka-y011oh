@@ -1,0 +1,146 @@
+International Jewish Association Donation Platform License
+Copyright (c) 2023 International Jewish Association Donation Platform
+All Rights Reserved
+
+1. DEFINITIONS
+
+1.1. "Software" refers to the International Jewish Association Donation Platform including all components:
+- Web Application
+- Mobile Applications (iOS and Android)
+- Backend Services
+- Infrastructure Code
+- Documentation
+- APIs and Integration Points
+- Database Schemas
+- Configuration Files
+- Build Scripts
+- Deployment Configurations
+
+1.2. "Organization" refers to the International Jewish Association Donation Platform and its authorized representatives.
+
+1.3. "User" refers to any individual or entity authorized to use the Software.
+
+1.4. "Religious Requirements" refers to Jewish religious laws and customs applicable to charitable operations.
+
+2. GRANT OF LICENSE
+
+2.1. Subject to the terms and conditions of this License, the Organization grants a limited, non-exclusive, non-transferable license to:
+a) View and use the Software for charitable donation processing
+b) Deploy the Software within authorized environments
+c) Integrate the Software with approved third-party services
+d) Monitor and maintain Software installations
+
+2.2. All rights not expressly granted are reserved by the Organization.
+
+3. RELIGIOUS CONSIDERATIONS
+
+3.1. The Software must be operated in accordance with Jewish religious requirements including:
+a) Proper handling of charitable funds
+b) Compliance with religious calendar and time calculations
+c) Appropriate handling of religious texts and symbols
+d) Respect for religious holidays and observances
+
+3.2. Any modifications must maintain compliance with religious requirements.
+
+4. INTERNATIONAL OPERATIONS
+
+4.1. The Software may be operated internationally subject to:
+a) Compliance with local regulations
+b) Adherence to cross-border financial regulations
+c) Implementation of region-specific requirements
+d) Maintenance of proper documentation for each jurisdiction
+
+4.2. Special provisions apply for operations in:
+- Israel
+- European Union
+- United States
+- Other supported regions
+
+5. DATA PROTECTION
+
+5.1. Users must comply with:
+- GDPR (European Union)
+- CCPA (California, USA)
+- Israeli Privacy Law
+- Other applicable data protection regulations
+
+5.2. Required measures include:
+a) Secure data storage and transmission
+b) User consent management
+c) Data subject rights fulfillment
+d) Breach notification procedures
+
+6. PAYMENT PROCESSING
+
+6.1. Payment operations must maintain:
+- PCI DSS Level 1 compliance
+- Local financial regulations compliance
+- Religious law compliance regarding charitable funds
+- Proper audit trails and documentation
+
+7. THIRD-PARTY SERVICES
+
+7.1. Integration with third-party services must:
+a) Maintain security standards
+b) Comply with service provider terms
+c) Preserve data protection requirements
+d) Adhere to religious requirements
+
+8. MODIFICATIONS
+
+8.1. Modifications to the Software:
+a) Must maintain compliance with all requirements
+b) Require appropriate review and approval
+c) Must preserve security controls
+d) Must respect religious considerations
+
+9. DISTRIBUTION
+
+9.1. Distribution of the Software is prohibited without explicit written permission from the Organization.
+
+10. WARRANTY AND LIABILITY
+
+10.1. THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+
+10.2. IN NO EVENT SHALL THE ORGANIZATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.
+
+11. COMPLIANCE REQUIREMENTS
+
+11.1. Users must maintain compliance with:
+- PCI DSS Level 1
+- GDPR
+- CCPA
+- Israeli Privacy Law
+- Religious Law
+- Financial Regulations
+- Charitable Organization Requirements
+
+12. REVIEW AND UPDATES
+
+12.1. This License requires:
+- Legal review for all changes
+- Religious authority review for compliance
+- Technical review for implementation impact
+- Quarterly review or review upon significant changes
+
+13. VERSION CONTROL
+
+13.1. License versioning follows semantic versioning principles.
+
+13.2. All changes must be tracked and approved through multi-stakeholder review.
+
+14. TERMINATION
+
+14.1. This License automatically terminates upon violation of any term.
+
+14.2. Upon termination, all use of the Software must cease immediately.
+
+15. GOVERNING LAW
+
+15.1. This License shall be governed by applicable international law and the laws of jurisdictions where the Software operates.
+
+For questions regarding this License, contact:
+International Jewish Association Donation Platform
+[Contact Information]
+
+END OF LICENSE
