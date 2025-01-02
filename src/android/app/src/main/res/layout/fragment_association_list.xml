@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ijap.app.ui.association.AssociationViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:layoutDirection="inherit"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_normal">
+
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_associations_hint"
+                android:layout_margin="@dimen/spacing_standard"
+                android:minHeight="@dimen/min_touch_target"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                android:contentDescription="@string/search_associations_description"
+                app:navigationIconTint="?attr/colorOnSurface" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:swipeRefreshLayoutProgressSpinnerBackgroundColor="?attr/colorPrimary">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/associationsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="@dimen/spacing_standard"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="outsideOverlay"
+                android:contentDescription="@string/associations_list_description"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_association"
+                tools:itemCount="5" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loadingIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="?attr/colorPrimary"
+            app:trackColor="?attr/colorSurface"
+            app:indicatorSize="48dp"
+            app:trackThickness="4dp"
+            android:contentDescription="@string/loading_associations_description" />
+
+        <TextView
+            android:id="@+id/emptyStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_associations_found"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:padding="@dimen/spacing_standard" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/errorStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorError"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:padding="@dimen/spacing_standard"
+            tools:text="Error loading associations" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
