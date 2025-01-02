@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jaeger-config
+  namespace: monitoring
+  labels:
+    app: jaeger
+    component: tracing
+
+data:
+  # Zipkin compatibility port for collecting traces
+  collector.zipkin.host-port: "9411"
+
+  # Path to sampling strategies configuration file
+  sampling.strategies-file: "/etc/jaeger/sampling.json"
+
+  # Sampling strategies configuration with service-specific rates
+  sampling.json: |
+    {
+      "service_strategies": [
+        {
+          "service": "donation-service",
+          "type": "probabilistic",
+          "param": 1.0
+        },
+        {
+          "service": "payment-service",
+          "type": "probabilistic",
+          "param": 1.0
+        },
+        {
+          "service": "campaign-service",
+          "type": "probabilistic",
+          "param": 1.0
+        }
+      ],
+      "default_strategy": {
+        "type": "probabilistic",
+        "param": 0.5
+      }
+    }
+
+  # Environment tag for all spans
+  agent.tags: "env=production"
+
+  # Maximum number of traces to keep in memory
+  memory.max-traces: "50000"
+
+  # Base path for Jaeger query service UI
+  query.base-path: "/jaeger"
+
+  # Logging configuration
+  log-level: "info"
