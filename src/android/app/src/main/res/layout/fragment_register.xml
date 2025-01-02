@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Registration Fragment Layout
+    Material Design Components version: 1.9.0
+    Implements WCAG 2.1 Level AA compliance and RTL support
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layoutDirection="locale"
+    android:importantForAccessibility="yes"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Progress Indicator for Registration Steps -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/auth_register"
+        app:trackCornerRadius="8dp"
+        app:indicatorColor="@color/primary"
+        app:trackColor="@color/divider_light"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:accessibilityLiveRegion="polite"/>
+
+    <!-- Registration Form Container -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/progressIndicator"
+        app:layout_constraintBottom_toTopOf="@id/registerButton">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:spacing="16dp">
+
+            <!-- Email Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_email_hint"
+                android:layout_marginBottom="16dp"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconContentDescription="@string/auth_email_hint"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:textDirection="locale"
+                    android:importantForAutofill="yes"
+                    android:autofillHints="emailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_password_hint"
+                android:layout_marginBottom="16dp"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconContentDescription="@string/auth_password_hint"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:textDirection="locale"
+                    android:importantForAutofill="yes"
+                    android:autofillHints="password"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Terms and Privacy Policy Checkbox -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/termsCheckbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_terms_agreement"
+                android:minHeight="48dp"
+                android:textAlignment="viewStart"
+                android:textDirection="locale"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="16dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Register Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_register"
+        android:minHeight="48dp"
+        android:layout_marginBottom="16dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/Widget.App.Button.Primary"
+        android:accessibilityLiveRegion="polite"
+        android:enabled="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
