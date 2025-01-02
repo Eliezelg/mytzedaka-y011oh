@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Settings Fragment Layout
+    Implements Material Design 3.0 principles with Jewish cultural elements
+    Supports RTL layouts and WCAG 2.1 Level AA compliance
+    Version: 1.0
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:fitsSystemWindows="true"
+    android:importantForAccessibility="yes">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.App.Toolbar"
+        app:title="@string/settings_title"
+        app:navigationIcon="@drawable/ic_back"
+        android:layoutDirection="locale"
+        android:contentDescription="@string/settings_toolbar_description"
+        app:navigationContentDescription="@string/navigate_back_description"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.preference.PreferenceScreen
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Language Settings -->
+            <androidx.preference.PreferenceCategory
+                android:title="@string/settings_language"
+                android:key="pref_language"
+                app:iconSpaceReserved="true"
+                app:icon="@drawable/ic_language"
+                style="@style/Widget.App.PreferenceCategory">
+
+                <androidx.preference.ListPreference
+                    android:key="app_language"
+                    android:title="@string/settings_language_selection"
+                    android:summary="@string/settings_language_summary"
+                    android:entries="@array/language_entries"
+                    android:entryValues="@array/language_values"
+                    android:defaultValue="system"
+                    app:iconSpaceReserved="false"
+                    android:layout_marginStart="@dimen/preference_margin"
+                    android:layout_marginEnd="@dimen/preference_margin"/>
+            </androidx.preference.PreferenceCategory>
+
+            <!-- Notification Settings -->
+            <androidx.preference.PreferenceCategory
+                android:title="@string/settings_notifications"
+                android:key="pref_notifications"
+                app:iconSpaceReserved="true"
+                app:icon="@drawable/ic_notifications"
+                style="@style/Widget.App.PreferenceCategory">
+
+                <androidx.preference.SwitchPreferenceCompat
+                    android:key="notifications_enabled"
+                    android:title="@string/settings_notifications_enable"
+                    android:summary="@string/settings_notifications_summary"
+                    android:defaultValue="true"
+                    app:iconSpaceReserved="false"/>
+
+                <androidx.preference.MultiSelectListPreference
+                    android:key="notification_types"
+                    android:title="@string/settings_notification_types"
+                    android:summary="@string/settings_notification_types_summary"
+                    android:entries="@array/notification_type_entries"
+                    android:entryValues="@array/notification_type_values"
+                    android:dependency="notifications_enabled"
+                    app:iconSpaceReserved="false"/>
+            </androidx.preference.PreferenceCategory>
+
+            <!-- Security Settings -->
+            <androidx.preference.PreferenceCategory
+                android:title="@string/settings_security"
+                android:key="pref_security"
+                app:iconSpaceReserved="true"
+                app:icon="@drawable/ic_security"
+                style="@style/Widget.App.PreferenceCategory">
+
+                <androidx.preference.SwitchPreferenceCompat
+                    android:key="biometric_login"
+                    android:title="@string/settings_biometric_login"
+                    android:summary="@string/settings_biometric_summary"
+                    android:defaultValue="false"
+                    app:iconSpaceReserved="false"/>
+
+                <androidx.preference.Preference
+                    android:key="change_password"
+                    android:title="@string/settings_change_password"
+                    android:summary="@string/settings_change_password_summary"
+                    app:iconSpaceReserved="false"/>
+
+                <androidx.preference.SwitchPreferenceCompat
+                    android:key="save_payment_info"
+                    android:title="@string/settings_save_payment"
+                    android:summary="@string/settings_save_payment_summary"
+                    android:defaultValue="false"
+                    app:iconSpaceReserved="false"/>
+            </androidx.preference.PreferenceCategory>
+
+        </androidx.preference.PreferenceScreen>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
