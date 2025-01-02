@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_campaigns"
+        android:icon="@drawable/ic_campaigns"
+        android:title="@string/navigation_campaigns"
+        android:contentDescription="@string/navigation_campaigns_description"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"
+        android:importantForAccessibility="yes"
+        android:focusable="true"
+        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
+
+    <item
+        android:id="@+id/navigation_donate"
+        android:icon="@drawable/ic_donate"
+        android:title="@string/navigation_donate"
+        android:contentDescription="@string/navigation_donate_description"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"
+        android:importantForAccessibility="yes"
+        android:focusable="true"
+        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/navigation_profile"
+        android:contentDescription="@string/navigation_profile_description"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"
+        android:importantForAccessibility="yes"
+        android:focusable="true"
+        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
+
+</menu>
