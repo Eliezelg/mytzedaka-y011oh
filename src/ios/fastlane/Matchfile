@@ -1,0 +1,78 @@
+# fastlane-plugin-match version: 2.217.0
+
+# Git URL for encrypted certificate storage
+git_url("git@github.com:ijap/certificates.git")
+
+# Use git storage mode for certificates and profiles
+storage_mode("git")
+
+# Default to development type, can be overridden by environment
+type(ENV["MATCH_TYPE"] || "development")
+
+# App identifier from Appfile
+app_identifier([
+  ENV["IJAP_APP_IDENTIFIER"] || "com.ijap.app"
+])
+
+# Team ID from Appfile
+team_id(ENV["IJAP_TEAM_ID"])
+
+# Set readonly to prevent unauthorized modifications
+readonly(true)
+
+# Force profile regeneration for new devices
+force_for_new_devices(true)
+
+# Enhanced security settings
+platform("ios")
+template_name("IJAP Certificates")
+generate_apple_certs(true)
+skip_provisioning_profiles(false)
+
+# Certificate settings
+api_key_path(ENV["APPLE_API_KEY_PATH"])
+api_key_id(ENV["APPLE_API_KEY_ID"])
+api_key_issuer_id(ENV["APPLE_API_KEY_ISSUER_ID"])
+
+# Encryption settings
+encryption_key_length(2048)
+shallow_clone(true)
+clone_branch_directly(true)
+force(false)
+
+# Certificate rotation and audit settings
+certificate_id(ENV["MATCH_CERTIFICATE_ID"])
+profile_name(ENV["MATCH_PROFILE_NAME"])
+fail_on_name_taken(true)
+skip_docs(false)
+verbose(true)
+
+# Additional security controls
+username(ENV["APPLE_DEVELOPER_USERNAME"])
+team_name(ENV["APPLE_TEAM_NAME"])
+git_branch(ENV["MATCH_GIT_BRANCH"] || "master")
+git_full_name("IJAP Certificate Bot")
+git_user_email("certificates@ijap.com")
+
+# Audit logging
+output_path("fastlane/certificates")
+verbose(true)
+skip_confirmation(false)
+skip_git_hooks(false)
+
+# Emergency revocation support
+force_for_new_certificates(false)
+include_all_certificates(true)
+include_mac_in_profiles(false)
+
+# Set workspace path for Xcode integration
+workspace("IJAP.xcworkspace")
+
+# Additional security headers
+ENV["MATCH_PASSWORD"] = ENV["MATCH_GIT_BASIC_AUTHORIZATION"]
+ENV["MATCH_KEYCHAIN_PASSWORD"] = ENV["MATCH_PASSWORD"]
+
+# Validate minimum requirements
+raise "Missing required MATCH_PASSWORD" unless ENV["MATCH_PASSWORD"]
+raise "Missing required APPLE_DEVELOPER_USERNAME" unless ENV["APPLE_DEVELOPER_USERNAME"]
+raise "Missing required IJAP_TEAM_ID" unless ENV["IJAP_TEAM_ID"]
