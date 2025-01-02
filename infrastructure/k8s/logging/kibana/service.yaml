@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: logging
+  labels:
+    app: kibana
+    service: logging
+    component: visualization
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "5601"
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+spec:
+  selector:
+    app: kibana
+  ports:
+    - name: http
+      port: 5601
+      targetPort: 5601
+      protocol: TCP
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  sessionAffinity: None
