@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Production build output
+build/
+
+# Test coverage reports
+coverage/
+
+# Static assets
+public/
+
+# TypeScript declaration files
+*.d.ts
+
+# Environment configuration files
+.env*
+
+# Style files
+*.css
+
+# Vector graphics
+*.svg
+
+# JSON files
+*.json
