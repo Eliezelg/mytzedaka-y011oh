@@ -1,0 +1,100 @@
+#!/usr/bin/env sh
+
+# Gradle wrapper script for Unix-like systems
+# Ensures consistent Gradle version usage across development environments
+
+##############################################################################
+# Script Constants
+##############################################################################
+
+# Default JVM options for Gradle
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m" "-Dfile.encoding=UTF-8" "-Duser.country=US" "-Duser.language=en"'
+
+# SHA-256 checksum for gradle-wrapper.jar verification
+GRADLE_WRAPPER_CHECKSUM="e996d452d2645e70c01c11143ca2d3742734a28da2bf61f25c82bdb288e4a07b"
+
+##############################################################################
+# Helper Functions
+##############################################################################
+
+# Logs error message and exits
+die() {
+    echo "ERROR: $*" >&2
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >> "$APP_HOME/gradle-wrapper.log"
+    exit 1
+}
+
+# Logs warning message
+warn() {
+    echo "WARNING: $*" >&2
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] WARNING: $*" >> "$APP_HOME/gradle-wrapper.log"
+}
+
+# Verifies Java installation
+verify_java() {
+    if [ -z "$JAVA_HOME" ]; then
+        die "JAVA_HOME is not set and no 'java' command could be found"
+    fi
+    
+    if [ ! -x "$JAVA_HOME/bin/java" ]; then
+        die "JAVA_HOME is set to an invalid directory: $JAVA_HOME"
+    fi
+}
+
+# Verifies gradle wrapper jar integrity
+verify_wrapper() {
+    if [ ! -f "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" ]; then
+        die "Gradle wrapper jar file is missing"
+    fi
+    
+    # Verify checksum if sha256sum is available
+    if command -v sha256sum > /dev/null; then
+        echo "$GRADLE_WRAPPER_CHECKSUM  $APP_HOME/gradle/wrapper/gradle-wrapper.jar" | sha256sum -c - || die "Gradle wrapper jar checksum verification failed"
+    else
+        warn "sha256sum not available - skipping wrapper verification"
+    fi
+}
+
+##############################################################################
+# Main Script
+##############################################################################
+
+# Resolve app home directory with symlink support
+PRG="$0"
+while [ -h "$PRG" ] ; do
+    ls=$(ls -ld "$PRG")
+    link=$(expr "$ls" : '.*-> \(.*\)$')
+    if expr "$link" : '/.*' > /dev/null; then
+        PRG="$link"
+    else
+        PRG=$(dirname "$PRG")/"$link"
+    fi
+done
+APP_HOME=$(dirname "$PRG")
+APP_HOME=$(cd "${APP_HOME:-./}" && pwd -P)
+
+# Verify Java installation
+verify_java
+
+# Verify wrapper jar
+verify_wrapper
+
+# Determine command line args
+APP_ARGS="$@"
+
+# Add default JVM options
+eval set -- $DEFAULT_JVM_OPTS
+
+# Set CLASSPATH
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+# By default we set GRADLE_OPTS to empty
+if [ -z "$GRADLE_OPTS" ]; then
+    GRADLE_OPTS=""
+fi
+
+# Execute Gradle wrapper
+exec "$JAVA_HOME/bin/java" $GRADLE_OPTS \
+    -classpath "$CLASSPATH" \
+    org.gradle.wrapper.GradleWrapperMain \
+    "$@"
