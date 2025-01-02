@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Slide out to left animation for screen transitions
+    Duration: 300ms
+    Interpolator: Accelerate-decelerate for natural motion
+    Performance optimized with minimal XML structure
+    Supports RTL layouts and accessibility preferences
+    Used in: Fragment transitions, Activity transitions, Navigation components
+    Version: Platform default (android:anim)
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="300"
+        android:fromXDelta="0"
+        android:toXDelta="-100%p"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+</set>
