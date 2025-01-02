@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layoutDirection="locale"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/donation_form_padding">
+
+        <!-- Form Title -->
+        <TextView
+            android:id="@+id/donation_form_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/make_donation"
+            style="@style/TextAppearance.App.Headline1"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:accessibilityHeading="true"/>
+
+        <!-- Amount Input Section -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/amount_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            style="@style/Widget.App.TextField"
+            app:layout_constraintTop_toBottomOf="@id/donation_form_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/currency_spinner"
+            app:layout_constraintWidth_percent="0.7"
+            android:hint="@string/donation_amount"
+            app:errorEnabled="true"
+            android:contentDescription="@string/amount_input_description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:minHeight="@dimen/min_touch_target"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Currency Spinner -->
+        <Spinner
+            android:id="@+id/currency_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:layout_constraintTop_toTopOf="@id/amount_input_layout"
+            app:layout_constraintBottom_toBottomOf="@id/amount_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/amount_input_layout"
+            android:minHeight="@dimen/min_touch_target"
+            android:contentDescription="@string/currency_spinner_description"/>
+
+        <!-- Donation Frequency Section -->
+        <RadioGroup
+            android:id="@+id/frequency_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/amount_input_layout"
+            android:orientation="vertical"
+            android:contentDescription="@string/frequency_group_description">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/frequency_one_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/one_time_donation"
+                android:checked="true"
+                android:minHeight="@dimen/min_touch_target"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/frequency_monthly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/monthly_donation"
+                android:minHeight="@dimen/min_touch_target"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/frequency_annual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/annual_donation"
+                android:minHeight="@dimen/min_touch_target"/>
+        </RadioGroup>
+
+        <!-- Anonymous Donation Checkbox -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/anonymous_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/make_anonymous"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/frequency_group"
+            android:minHeight="@dimen/min_touch_target"/>
+
+        <!-- Dedication Checkbox -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/dedication_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_dedication"
+            app:layout_constraintTop_toBottomOf="@id/anonymous_checkbox"
+            android:minHeight="@dimen/min_touch_target"/>
+
+        <!-- Action Buttons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_button"
+            style="@style/Widget.App.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/dedication_checkbox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/cancel_button_description"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/proceed_button"
+            style="@style/Widget.App.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/proceed_to_payment"
+            app:layout_constraintTop_toTopOf="@id/cancel_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/proceed_button_description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
