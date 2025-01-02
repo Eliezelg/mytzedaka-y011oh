@@ -1,0 +1,132 @@
+{
+  "app": {
+    "name": "Plateforme de Dons pour l'Association Juive Internationale",
+    "shortName": "IJAP",
+    "legalName": "Association Juive Internationale - Plateforme de Dons",
+    "description": "Plateforme sécurisée pour les dons aux associations juives"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "donate": "Faire un don",
+    "campaigns": "Campagnes",
+    "associations": "Associations",
+    "profile": "Mon profil",
+    "dashboard": "Tableau de bord"
+  },
+  "accessibility": {
+    "skipToMain": "Passer au contenu principal",
+    "menuButton": "Ouvrir le menu",
+    "closeButton": "Fermer",
+    "expandButton": "Développer",
+    "collapseButton": "Réduire",
+    "screenReaderOnly": "Contenu pour lecteur d'écran"
+  },
+  "legal": {
+    "cerfa": {
+      "title": "Reçu fiscal CERFA",
+      "number": "Numéro CERFA",
+      "description": "Reçu fiscal au titre des dons à certains organismes d'intérêt général",
+      "notice": "Document officiel pour votre déclaration d'impôts"
+    },
+    "terms": {
+      "donation": "Don",
+      "taxReceipt": "Reçu fiscal",
+      "association": "Association loi 1901",
+      "privacy": "Protection des données personnelles",
+      "gdpr": "Conformité RGPD"
+    },
+    "disclaimers": {
+      "taxDeduction": "66% de votre don est déductible de vos impôts",
+      "dataProtection": "Vos données sont protégées conformément au RGPD",
+      "securePayment": "Paiement sécurisé SSL"
+    }
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "email": "Veuillez saisir une adresse email valide",
+    "password": {
+      "length": "Le mot de passe doit contenir au moins 8 caractères",
+      "uppercase": "Au moins une lettre majuscule",
+      "lowercase": "Au moins une lettre minuscule",
+      "number": "Au moins un chiffre",
+      "special": "Au moins un caractère spécial"
+    },
+    "amount": {
+      "minimum": "Le montant minimum est de 1 €",
+      "maximum": "Le montant maximum est de 100 000 €",
+      "format": "Veuillez saisir un montant valide"
+    },
+    "date": {
+      "format": "Format de date invalide (JJ/MM/AAAA)",
+      "future": "La date doit être dans le futur",
+      "past": "La date doit être dans le passé"
+    }
+  },
+  "errors": {
+    "generic": "Une erreur est survenue. Veuillez réessayer.",
+    "network": "Erreur de connexion. Vérifiez votre connexion internet.",
+    "unauthorized": "Accès non autorisé. Veuillez vous connecter.",
+    "session": "Votre session a expiré. Veuillez vous reconnecter.",
+    "validation": "Veuillez corriger les erreurs dans le formulaire.",
+    "payment": {
+      "declined": "Paiement refusé. Veuillez vérifier vos informations.",
+      "insufficient": "Fonds insuffisants.",
+      "technical": "Erreur technique lors du paiement."
+    }
+  },
+  "donation": {
+    "title": "Faire un don",
+    "amount": "Montant",
+    "currency": "€",
+    "frequency": {
+      "single": "Unique",
+      "monthly": "Mensuel",
+      "annual": "Annuel"
+    },
+    "dedication": {
+      "title": "Dédier ce don",
+      "inHonor": "En l'honneur de",
+      "inMemory": "À la mémoire de"
+    },
+    "anonymous": "Don anonyme",
+    "submit": "Confirmer le don"
+  },
+  "campaign": {
+    "status": {
+      "active": "En cours",
+      "completed": "Terminée",
+      "upcoming": "À venir"
+    },
+    "progress": {
+      "goal": "Objectif",
+      "raised": "Collecté",
+      "remaining": "Restant",
+      "donors": "Donateurs"
+    }
+  },
+  "profile": {
+    "personal": {
+      "title": "Informations personnelles",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "phone": "Téléphone"
+    },
+    "donations": {
+      "title": "Historique des dons",
+      "total": "Total des dons",
+      "taxReceipts": "Reçus fiscaux"
+    }
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "loading": "Chargement...",
+    "success": "Succès",
+    "error": "Erreur",
+    "confirm": "Confirmer",
+    "back": "Retour"
+  }
+}
