@@ -1,0 +1,66 @@
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+.nyc_output
+/cypress/videos/
+/cypress/screenshots/
+/cypress/downloads/
+
+# Production
+/build
+/dist
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Payment Configuration
+stripe.config.json
+tranzilla.config.json
+payment.*.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Cache
+.cache/
+.eslintcache
+.stylelintcache
+
+# RTL/LTR
+**/*.rtl.css
+**/*.generated.rtl.css
+
+# Temporary files
+*.tmp
+*.temp
+
+# Performance Testing
+lighthouse-reports/
+performance-results/
+
+# Bundle Analysis
+bundle-analysis.json
+stats.json
