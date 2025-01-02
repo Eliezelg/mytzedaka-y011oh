@@ -1,0 +1,109 @@
+{
+  "app": {
+    "name": "פלטפורמת תרומות לאגודות יהודיות בינלאומיות",
+    "shortName": "IJAP",
+    "description": "פלטפורמה מאובטחת לתרומות לאגודות יהודיות",
+    "legal": "כל הזכויות שמורות"
+  },
+  "navigation": {
+    "home": "דף הבית",
+    "dashboard": "לוח בקרה",
+    "associations": "אגודות",
+    "campaigns": "מבצעים",
+    "donations": "תרומות",
+    "profile": "פרופיל",
+    "settings": "הגדרות",
+    "reports": "דוחות",
+    "documents": "מסמכים",
+    "help": "עזרה"
+  },
+  "auth": {
+    "login": "התחברות",
+    "register": "הרשמה",
+    "logout": "התנתקות",
+    "forgotPassword": "שכחת סיסמה",
+    "twoFactor": "אימות דו-שלבי",
+    "emailPlaceholder": "הכנס את האימייל שלך",
+    "passwordPlaceholder": "הכנס את הסיסמה שלך",
+    "confirmPasswordPlaceholder": "אשר את הסיסמה שלך",
+    "rememberMe": "זכור אותי",
+    "loginSuccess": "התחברת בהצלחה",
+    "loginError": "ההתחברות נכשלה",
+    "registerSuccess": "נרשמת בהצלחה",
+    "registerError": "ההרשמה נכשלה",
+    "verificationRequired": "נדרש אימות חשבון",
+    "verificationSent": "נשלח קוד אימות",
+    "biometricPrompt": "השתמש בזיהוי ביומטרי"
+  },
+  "payment": {
+    "stripe": {
+      "cardPlaceholder": "מספר כרטיס אשראי",
+      "expiryPlaceholder": "MM/YY",
+      "cvvPlaceholder": "CVV",
+      "processing": "מעבד תשלום",
+      "success": "התשלום הצליח",
+      "error": "התשלום נכשל"
+    },
+    "tranzilla": {
+      "israeliId": "תעודת זהות",
+      "installments": "תשלומים",
+      "regularCredit": "רגיל",
+      "immediateDebit": "חיוב מיידי",
+      "payments": "תשלומים"
+    },
+    "methods": {
+      "creditCard": "כרטיס אשראי",
+      "debitCard": "כרטיס דביט",
+      "bankTransfer": "העברה בנקאית",
+      "directDebit": "הוראת קבע"
+    }
+  },
+  "documents": {
+    "taxReceipt": {
+      "title": "קבלה למס",
+      "number": "מספר קבלה",
+      "date": "תאריך",
+      "amount": "סכום",
+      "purpose": "מטרת התרומה",
+      "organization": "שם העמותה",
+      "donor": "שם התורם",
+      "signature": "חתימה"
+    },
+    "verification": {
+      "pending": "ממתין לאימות",
+      "approved": "מאומת",
+      "rejected": "נדחה",
+      "requiresUpdate": "נדרש עדכון"
+    }
+  },
+  "dates": {
+    "hebrew": {
+      "format": "DD בMMMM YYYY",
+      "calendar": "לוח עברי",
+      "today": "היום",
+      "tomorrow": "מחר",
+      "yesterday": "אתמול"
+    },
+    "gregorian": {
+      "format": "DD/MM/YYYY",
+      "calendar": "לוח לועזי"
+    }
+  },
+  "currency": {
+    "ils": {
+      "symbol": "₪",
+      "name": "שקל חדש",
+      "format": "###,###.## ₪"
+    },
+    "usd": {
+      "symbol": "$",
+      "name": "דולר אמריקאי",
+      "format": "$ ###,###.##"
+    },
+    "eur": {
+      "symbol": "€",
+      "name": "אירו",
+      "format": "€ ###,###.##"
+    }
+  }
+}
