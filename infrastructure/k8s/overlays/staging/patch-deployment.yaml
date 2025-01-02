@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ijap-api
+spec:
+  replicas: 2  # Reduced replicas for staging environment
+  template:
+    spec:
+      containers:
+        - name: api
+          resources:
+            requests:
+              cpu: "500m"      # Staging-specific CPU request
+              memory: "1Gi"    # Increased memory request for testing
+            limits:
+              cpu: "1"         # CPU limit aligned with container specs
+              memory: "2Gi"    # Memory limit for staging workloads
+          env:
+            - name: NODE_ENV
+              value: "staging"
+            - name: LOG_LEVEL
+              value: "debug"   # Enhanced logging for staging
+            # Staging payment gateway credentials
+            - name: STRIPE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: staging-payment-secrets
+                  key: stripe-api-key
+            - name: TRANZILLA_TERMINAL_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: staging-payment-secrets
+                  key: tranzilla-terminal-key
+          livenessProbe:
+            initialDelaySeconds: 20  # Reduced delay for faster testing feedback
+            periodSeconds: 10        # Health check frequency
+          readinessProbe:
+            initialDelaySeconds: 10  # Quicker readiness checks for staging
+            periodSeconds: 5         # More frequent readiness checks
