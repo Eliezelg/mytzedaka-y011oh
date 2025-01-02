@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ijap.app.profile.ProfileViewModel" />
+        <variable
+            name="lifecycleOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_medium"
+        android:layoutDirection="locale"
+        android:importantForAccessibility="yes"
+        android:clipToPadding="false">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstNameLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.firstName}"
+                android:hint="@string/profile.first_name"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:contentDescription="@string/profile.first_name"
+                android:importantForAccessibility="yes"
+                android:textSize="@dimen/text_size_body"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastNameLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            app:layout_constraintTop_toBottomOf="@id/firstNameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.lastName}"
+                android:hint="@string/profile.last_name"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:contentDescription="@string/profile.last_name"
+                android:importantForAccessibility="yes"
+                android:textSize="@dimen/text_size_body"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            app:layout_constraintTop_toBottomOf="@id/lastNameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:text="@={viewModel.phone}"
+                android:hint="@string/profile.phone"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:contentDescription="@string/profile.phone"
+                android:importantForAccessibility="yes"
+                android:textSize="@dimen/text_size_body"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/common.save"
+            android:enabled="@{viewModel.isValid}"
+            android:minHeight="@dimen/accessibility_touch_target_min"
+            android:contentDescription="@string/common.save"
+            android:importantForAccessibility="yes"
+            app:layout_constraintTop_toBottomOf="@id/phoneLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:contentDescription="@string/common.loading"
+            android:importantForAccessibility="yes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
