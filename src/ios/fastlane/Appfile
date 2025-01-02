@@ -1,0 +1,56 @@
+# fastlane version: 2.217.0
+
+# Validate required credentials and their format
+def validate_credentials
+  required_vars = ['IJAP_APP_IDENTIFIER', 'IJAP_APPLE_ID', 'IJAP_TEAM_ID', 'IJAP_ITC_TEAM_ID']
+  
+  # Check for missing required environment variables
+  missing_vars = required_vars.select { |var| ENV[var].nil? }
+  unless missing_vars.empty?
+    UI.error "Missing required environment variables: #{missing_vars.join(', ')}"
+    return false
+  end
+  
+  # Validate Apple ID email format
+  unless ENV['IJAP_APPLE_ID'] =~ URI::MailTo::EMAIL_REGEXP
+    UI.error "Invalid Apple ID email format"
+    return false
+  end
+  
+  # Validate Team ID format (10 character alphanumeric)
+  unless ENV['IJAP_TEAM_ID'] =~ /^[A-Z0-9]{10}$/
+    UI.error "Invalid Team ID format"
+    return false
+  end
+  
+  # Validate App Identifier format
+  unless ENV['IJAP_APP_IDENTIFIER'] =~ /^[a-zA-Z0-9\.]+$/
+    UI.error "Invalid App Identifier format"
+    return false
+  end
+  
+  true
+end
+
+# App identifier based on environment with fallback
+app_identifier(
+  ENV['IJAP_APP_IDENTIFIER'] || 'com.ijap.app'
+)
+
+# Apple ID from secure environment variable
+apple_id(
+  ENV['IJAP_APPLE_ID']
+)
+
+# Developer Portal Team ID from secure environment variable
+team_id(
+  ENV['IJAP_TEAM_ID']
+)
+
+# App Store Connect Team ID from secure environment variable
+itc_team_id(
+  ENV['IJAP_ITC_TEAM_ID']
+)
+
+# Validate credentials on load
+validate_credentials
