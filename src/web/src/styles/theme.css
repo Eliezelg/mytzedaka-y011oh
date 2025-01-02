@@ -1,0 +1,184 @@
+/* Theme CSS Variables - Material Design 3.0
+ * Version: 1.0.0
+ * Supports: Light/Dark modes, RTL layouts, Jewish cultural elements
+ */
+
+:root {
+  /* Primary Colors */
+  --primary-main: #1976D2;
+  --primary-light: #42A5F5;
+  --primary-dark: #1565C0;
+
+  /* Secondary Colors */
+  --secondary-main: #424242;
+  --secondary-light: #616161;
+  --secondary-dark: #212121;
+
+  /* Status Colors */
+  --error-main: #D32F2F;
+  --warning-main: #ED6C02;
+  --info-main: #0288D1;
+  --success-main: #2E7D32;
+
+  /* Background Colors */
+  --background-default: #FFFFFF;
+  --background-paper: #F5F5F5;
+
+  /* Text Colors */
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --spacing-xs: calc(var(--spacing-unit) * 0.5);
+  --spacing-sm: var(--spacing-unit);
+  --spacing-md: calc(var(--spacing-unit) * 2);
+  --spacing-lg: calc(var(--spacing-unit) * 3);
+  --spacing-xl: calc(var(--spacing-unit) * 4);
+
+  /* Borders & Shadows */
+  --border-radius: 4px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-width: 1px;
+  --border-color: rgba(0, 0, 0, 0.12);
+
+  /* Layout Direction */
+  --direction: ltr;
+  --text-align: left;
+
+  /* Jewish Cultural Elements */
+  --jewish-blue: #0038B8;
+  --jewish-gold: #C6A962;
+
+  /* Transitions */
+  --transition-duration: 0.3s;
+  --transition-timing: ease-in-out;
+
+  /* Z-index Layers */
+  --z-index-drawer: 1200;
+  --z-index-modal: 1300;
+  --z-index-snackbar: 1400;
+  --z-index-tooltip: 1500;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --primary-main: #2196F3;
+  --primary-light: #4FC3F7;
+  --primary-dark: #1976D2;
+  
+  --secondary-main: #FFFFFF;
+  --secondary-light: #F5F5F5;
+  --secondary-dark: #E0E0E0;
+  
+  --background-default: #121212;
+  --background-paper: #1E1E1E;
+  
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  
+  --border-color: rgba(255, 255, 255, 0.12);
+  
+  --jewish-blue: #4B9FFF;
+  --jewish-gold: #DFC285;
+}
+
+/* RTL Support */
+[dir='rtl'] {
+  --direction: rtl;
+  --text-align: right;
+}
+
+/* Theme Transitions */
+.theme-transitions {
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+/* Theme Color Utilities */
+.primary-bg {
+  background-color: var(--primary-main);
+  color: #FFFFFF;
+}
+
+.secondary-bg {
+  background-color: var(--secondary-main);
+  color: #FFFFFF;
+}
+
+.jewish-accent {
+  color: var(--jewish-blue);
+  background-color: var(--jewish-gold);
+}
+
+/* Elevation Utilities */
+.elevation-1 {
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
+              0px 1px 1px 0px rgba(0,0,0,0.14),
+              0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.elevation-2 {
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),
+              0px 2px 2px 0px rgba(0,0,0,0.14),
+              0px 1px 5px 0px rgba(0,0,0,0.12);
+}
+
+/* Typography Utilities */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+/* Layout Utilities */
+.rtl-aware {
+  direction: var(--direction);
+  text-align: var(--text-align);
+}
+
+/* Spacing Utilities */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--spacing-sm); }
+.m-2 { margin: var(--spacing-md); }
+.m-3 { margin: var(--spacing-lg); }
+.m-4 { margin: var(--spacing-xl); }
+
+.p-0 { padding: 0; }
+.p-1 { padding: var(--spacing-sm); }
+.p-2 { padding: var(--spacing-md); }
+.p-3 { padding: var(--spacing-lg); }
+.p-4 { padding: var(--spacing-xl); }
+
+/* Border Utilities */
+.rounded {
+  border-radius: var(--border-radius);
+}
+
+.rounded-lg {
+  border-radius: var(--border-radius-lg);
+}
+
+/* Responsive Typography */
+@media (max-width: 600px) {
+  :root {
+    --spacing-unit: 4px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  :root {
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --background-default: #FFFFFF;
+  }
+}
